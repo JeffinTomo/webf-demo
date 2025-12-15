@@ -1,31 +1,19 @@
 import { useEffect, useState } from 'react';
-import { apiService } from '../../api';
 import type { ActivityItem } from '../../api/types';
 
 export default function NewUserRequest() {
-  const [activities, setActivities] = useState<ActivityItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const activity = {
+    'activity-id': '123',
+    logo: 'https://via.placeholder.com/150',
+    title: 'Purchase crypto more than $50',
+    tx_time: '2021-01-01',
+    status: 'available',
+    points: 100
+  };
 
   useEffect(() => {
-    loadActivities();
   }, []);
 
-  const loadActivities = async () => {
-    try {
-      setLoading(true);
-      const data = await apiService.getActivities();
-      // Filter for new user activities (special activity type)
-      const newUserActivities = data.data.list.filter(
-        (activity) => activity.title.toLowerCase().includes('new user') ||
-        activity.title.toLowerCase().includes('新用户')
-      );
-      setActivities(newUserActivities);
-    } catch (error) {
-      console.error('Failed to load activities:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleActivityClick = (activity: ActivityItem) => {
     // Handle activity action
@@ -33,52 +21,171 @@ export default function NewUserRequest() {
     // In a real app, this would trigger the activity completion flow
   };
 
-  if (loading) {
-    return (
-      <div className="px-4 py-6 bg-white border-b border-gray-200">
-        <div className="text-sm text-gray-500">Loading...</div>
-      </div>
-    );
-  }
-
-  if (activities.length === 0) {
-    return null;
-  }
-
   return (
-    <div className="px-4 py-6 bg-white border-b border-gray-200">
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold text-gray-900">New User Request</h2>
-        <p className="text-sm text-gray-500 mt-1">Complete tasks to earn points</p>
+    <div
+      className="mx-auto my-[30px]"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        padding: '0px',
+        gap: '20px',
+        width: '335px'
+      }}
+    >
+      {/* Header */}
+      <div style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: '2px 0px',
+        gap: '6px',
+        height: '28px'
+      }}>
+        {/* Medal Icon */}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 15C15.866 15 19 11.866 19 8C19 4.13401 15.866 1 12 1C8.13401 1 5 4.13401 5 8C5 11.866 8.13401 15 12 15Z" stroke="#FAFAF9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M8.21 13.89L7 23L12 20L17 23L15.79 13.88" stroke="#FAFAF9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          padding: '0px',
+          gap: '4px'
+        }}>
+          <span style={{
+            fontWeight: 600,
+            fontSize: '20px',
+            lineHeight: '140%',
+            color: '#FAFAF9'
+          }}>
+            New user quest
+          </span>
+
+          {/* Question Icon */}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7" cy="7" r="6" stroke="#79716B" strokeWidth="1.16667" />
+            <path d="M7 6V7M7 10H7.01" stroke="#79716B" strokeWidth="1.16667" strokeLinecap="round" />
+          </svg>
+        </div>
       </div>
-      <div className="space-y-3">
-        {activities.map((activity) => (
-          <div
-            key={activity['activity-id']}
-            onClick={() => handleActivityClick(activity)}
-            className="flex items-center p-4 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors"
-          >
-            <img
-              src={activity.logo}
-              alt={activity.title}
-              className="w-12 h-12 rounded-full mr-4"
-            />
-            <div className="flex-1">
-              <div className="font-medium text-gray-900">{activity.title}</div>
-              <div className="text-sm text-gray-500 mt-1">
-                Status: {activity.status}
-              </div>
+
+      {/* Quest Cards */}
+      <div
+        key={activity['activity-id']}
+        onClick={() => handleActivityClick(activity)}
+        className="cursor-pointer active:scale-[0.98] transition-all"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+          padding: '22px 20px',
+          isolation: 'isolate',
+          width: '335px',
+          height: '101px',
+          background: 'linear-gradient(180deg, #421E06 0%, #713C12 100%)',
+          borderRadius: '12px',
+          position: 'relative',
+          overflow: 'hidden',
+          boxSizing: 'border-box'
+        }}
+      >
+        {/* Decorative Background Elements */}
+        <div style={{
+          position: 'absolute',
+          width: '312.3px',
+          height: '110.98px',
+          left: '122.56px',
+          top: '-30.32px',
+          background: 'rgba(255, 255, 255, 0.22)',
+          opacity: 0.4,
+          transform: 'matrix(-0.97, -0.25, -0.25, 0.97, 0, 0)',
+          pointerEvents: 'none'
+        }} />
+
+        {/* Golden Circle */}
+        <div style={{
+          position: 'absolute',
+          right: '-20px',
+          top: '-10px',
+          width: '80px',
+          height: '80px',
+          background: '#E7AC08',
+          borderRadius: '50%',
+          opacity: 0.6,
+          pointerEvents: 'none'
+        }} />
+
+        {/* Content */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'flex-end',
+          padding: '0px',
+          gap: '60px',
+          width: '100%',
+          position: 'relative',
+          zIndex: 1
+        }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            padding: '0px',
+            gap: '2px',
+            flex: 1
+          }}>
+            <div style={{
+              fontWeight: 600,
+              fontSize: '18px',
+              lineHeight: '140%',
+              color: '#FEEC8A'
+            }}>
+              Get {activity.points} Points
             </div>
-            <div className="text-right">
-              <div className="font-semibold text-green-600">
-                +{activity.points}
-              </div>
-              <button className="mt-2 px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors">
-                {activity.status === 'available' ? 'Start' : 'View'}
-              </button>
+            <div style={{
+              fontWeight: 400,
+              fontSize: '12px',
+              lineHeight: '140%',
+              color: '#FAFAF9'
+            }}>
+              {activity.title}
             </div>
           </div>
-        ))}
+
+          {/* Action Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleActivityClick(activity);
+            }}
+            style={{
+              boxSizing: 'border-box',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              padding: '8px',
+              gap: '4px',
+              width: '32px',
+              height: '32px',
+              background: '#EAAC08',
+              borderRadius: '99px',
+              border: 'none',
+              cursor: 'pointer',
+              flexShrink: 0
+            }}
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9.12868 6.58363L9.53674e-07 6.58363V5.08363L9.12868 5.08363L5.1057 1.06066L6.16635 -2.54997e-07L12 5.83363L6.16635 11.6673L5.1057 10.6066L9.12868 6.58363Z" fill="black" />
+            </svg>
+
+          </button>
+        </div>
       </div>
     </div>
   );
