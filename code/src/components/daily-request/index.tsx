@@ -151,7 +151,7 @@ interface ActivityCardProps {
 function ActivityCard({ icon, iconText, title, progress, status, onClick }: ActivityCardProps) {
   const progressPercent = (progress.current / progress.total) * 100;
   const isCompleted = status === 'completed';
-  const isActive = status === 'active';
+  // const isActive = status === 'active';
 
   return (
     <div

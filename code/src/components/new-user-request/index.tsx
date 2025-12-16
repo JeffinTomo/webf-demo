@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import type { ActivityItem } from '../../api/types';
 
 export default function NewUserRequest() {
