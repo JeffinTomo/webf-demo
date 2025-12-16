@@ -29,7 +29,7 @@ export default function PointsRecordsPage() {
       alignItems: 'flex-start',
       padding: '50px 0px',
       gap: '24px',
-      width: '375px',
+      width: 'calc(100% - 40px)',
       margin: '0 auto',
       minHeight: '100vh'
     }}>
@@ -39,7 +39,7 @@ export default function PointsRecordsPage() {
           flexDirection: 'column',
           alignItems: 'flex-start',
           padding: '0px',
-          width: '375px'
+          width: '100%'
         }}>
           {/* Date Header */}
           <div style={{
@@ -48,7 +48,7 @@ export default function PointsRecordsPage() {
             justifyContent: 'space-between',
             alignItems: 'center',
             padding: '8px 20px',
-            width: '375px',
+            width: '100%',
             height: '40px',
             boxSizing: 'border-box'
           }}>
@@ -90,7 +90,7 @@ function RecordItem({ icon, title, subtitle, subtext, status, points }: RecordIt
       justifyContent: 'space-between',
       alignItems: 'center',
       padding: '12px 20px',
-      width: '375px',
+      width: '100%',
       height: status ? '80px' : '80px',
       boxSizing: 'border-box'
     }}>
