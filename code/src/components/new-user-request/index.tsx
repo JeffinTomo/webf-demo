@@ -25,12 +25,9 @@ export default function NewUserRequest() {
     <div
       className="mx-auto my-[30px]"
       style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        padding: '0px',
-        gap: '20px',
-        width: '335px'
+        width: '100%',
+        padding: '20px',
+        boxSizing: 'border-box'
       }}
     >
       {/* Header */}
@@ -84,7 +81,8 @@ export default function NewUserRequest() {
           alignItems: 'flex-start',
           padding: '22px 20px',
           isolation: 'isolate',
-          width: '335px',
+          marginTop: '20px',
+          width: '100%',
           height: '101px',
           background: 'linear-gradient(180deg, #421E06 0%, #713C12 100%)',
           borderRadius: '12px',
@@ -93,31 +91,6 @@ export default function NewUserRequest() {
           boxSizing: 'border-box'
         }}
       >
-        {/* Decorative Background Elements */}
-        <div style={{
-          position: 'absolute',
-          width: '312.3px',
-          height: '110.98px',
-          left: '122.56px',
-          top: '-30.32px',
-          background: 'rgba(255, 255, 255, 0.22)',
-          opacity: 0.4,
-          transform: 'matrix(-0.97, -0.25, -0.25, 0.97, 0, 0)',
-          pointerEvents: 'none'
-        }} />
-
-        {/* Golden Circle */}
-        <div style={{
-          position: 'absolute',
-          right: '-20px',
-          top: '-10px',
-          width: '80px',
-          height: '80px',
-          background: '#E7AC08',
-          borderRadius: '50%',
-          opacity: 0.6,
-          pointerEvents: 'none'
-        }} />
 
         {/* Content */}
         <div style={{

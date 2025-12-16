@@ -68,14 +68,14 @@ export default function InviteFriends() {
     <div
       id="invite-friends"
       style={{
-        width: 'calc(100% - 60px)',
+        width: 'calc(100% - 40px)',
         height: '233px',
         display: 'flex',
         boxSizing: 'border-box',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: '40px auto',
+        margin: '40px auto 20px',
         padding: '20px',
         gap: '20px',
         background: 'linear-gradient(121.99deg, rgba(37, 24, 6, 0.43) 0%, rgba(60, 47, 23, 0.75) 99.79%)',

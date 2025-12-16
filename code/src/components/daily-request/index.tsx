@@ -32,9 +32,10 @@ export default function DailyRequest() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        padding: '0px',
         gap: '20px',
-        width: '335px'
+        width: '100%',
+        padding: '20px',
+        boxSizing: 'border-box'
       }}
     >
       {/* Header */}
