@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { WebFListView } from '../../components/webf-listview';
 
 export default function PointsRecordsPage() {
   const navigate = useNavigate();
@@ -8,7 +10,7 @@ export default function PointsRecordsPage() {
   };
 
   // Mock data for demonstration
-  const recordsData = [
+  const initialRecordsData = [
     {
       date: '12/07/2024',
       records: [
@@ -30,14 +32,40 @@ export default function PointsRecordsPage() {
     }
   ];
 
+  const [recordsData, setRecordsData] = useState(initialRecordsData);
+
+  const handleRefresh = () => {
+    console.log('Refreshing points records...');
+    // Simulate refresh - reset to initial data
+    setTimeout(() => {
+      setRecordsData(initialRecordsData);
+      console.log('Refresh complete');
+    }, 1000);
+  };
+
+  const handleLoadMore = () => {
+    console.log('Loading more records...');
+    // Simulate loading more data
+    setTimeout(() => {
+      const newSection = {
+        date: '05/07/2024',
+        records: [
+          { id: `${Date.now()}-1`, icon: 'checking', title: 'Daily Checking', subtitle: 'Check in', points: 20 },
+          { id: `${Date.now()}-2`, icon: 'wallet', title: 'Keep Balance', subtitle: 'Check in', points: 30 },
+        ]
+      };
+      setRecordsData([...recordsData, newSection]);
+      console.log('Loaded more items');
+    }, 1000);
+  };
+
   return (
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'flex-start',
-      minHeight: '100vh',
-      paddingTop: "20px",
-      width: '100%'
+      height: '100vh',
+      width: '100%',
+      overflow: 'hidden'
     }}>
       {/* Top Navigation Bar */}
       <div style={{
@@ -50,6 +78,7 @@ export default function PointsRecordsPage() {
         width: '100%',
         height: '48px',
         boxSizing: 'border-box',
+        flexShrink: 0
       }}>
         {/* Back Button - Left */}
         <div
@@ -92,53 +121,63 @@ export default function PointsRecordsPage() {
         }} />
       </div>
 
-      {/* Content */}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        padding: '24px 0px',
-        gap: '24px',
-        width: 'calc(100% - 40px)',
-        margin: '0 auto',
-        flex: 1
-      }}>
-        {recordsData.map((section, sectionIndex) => (
-          <div key={sectionIndex} style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            padding: '0px',
-            width: '100%'
-          }}>
-            {/* Date Header */}
-            <div style={{
+      {/* Content with WebFListView */}
+      <WebFListView
+        onRefresh={handleRefresh}
+        onLoadmore={handleLoadMore}
+        refresh-style="customCupertino"
+        style={{
+          flex: 1,
+          width: '100%',
+          height: 'calc(100vh - 48px)'
+        }}
+      >
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          padding: '24px 0px',
+          gap: '24px',
+          width: 'calc(100% - 40px)',
+          margin: '0 auto'
+        }}>
+          {recordsData.map((section, sectionIndex) => (
+            <div key={sectionIndex} style={{
               display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              padding: '8px 20px',
-              width: '100%',
-              height: '40px',
-              boxSizing: 'border-box'
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              padding: '0px',
+              width: '100%'
             }}>
-              <span style={{
-                fontWeight: 400,
-                fontSize: '14px',
-                lineHeight: '140%',
-                color: '#79716B'
+              {/* Date Header */}
+              <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                padding: '8px 20px',
+                width: '100%',
+                height: '40px',
+                boxSizing: 'border-box'
               }}>
-                {section.date}
-              </span>
-            </div>
+                <span style={{
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  lineHeight: '140%',
+                  color: '#79716B'
+                }}>
+                  {section.date}
+                </span>
+              </div>
 
-            {/* Records */}
-            {section.records.map((record) => (
-              <RecordItem key={record.id} {...record} />
-            ))}
-          </div>
-        ))}
-      </div>
+              {/* Records */}
+              {section.records.map((record) => (
+                <RecordItem key={record.id} {...record} />
+              ))}
+            </div>
+          ))}
+        </div>
+      </WebFListView>
     </div>
   );
 }
