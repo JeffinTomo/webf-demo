@@ -13,21 +13,20 @@ import { WebFListView } from '../../components/webf-listview';
  */
 export default function HomePage() {
   const [myPointsData, setMyPointsData] = useState<MyPointsResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-
+  // const [loading, setLoading] = useState(true);
   useEffect(() => {
     loadData();
   }, []);
 
   const loadData = async () => {
     try {
-      setLoading(true);
+      //  setLoading(true);
       const data = await apiService.getMyPoints();
       setMyPointsData(data);
     } catch (error) {
       console.error('Failed to load my points:', error);
     } finally {
-      setLoading(false);
+      //  setLoading(false);
     }
   };
 
@@ -35,17 +34,14 @@ export default function HomePage() {
     <WebFListView onRefresh={loadData}>
       <div className="min-h-screen pb-[100px]">
         <div className="max-w-md min-h-screen mx-auto pb-8 pt-4">
-          {myPointsData && (
-            <>
-              <MyPoints
-                points={myPointsData.data.points}
-              />
-              <InviteFriends />
-              <NewUserRequest />
-              <DailyRequest />
-              <Activities />
-            </>
-          )}
+      
+          <MyPoints
+            points={myPointsData?.data?.points ?? 0}
+          />
+          <InviteFriends />
+          <NewUserRequest />
+          <DailyRequest />
+          <Activities />
         </div>
       </div>
     </WebFListView>
