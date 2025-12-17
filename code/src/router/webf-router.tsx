@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useEffect } from 'react';
+import React, { type PropsWithChildren, useEffect } from 'react';
 
 /**
  * WebF Router Compatibility Layer
@@ -153,7 +153,7 @@ export const WebFRouter = isWebF && WebFLib
       canPop: () => window.history.length > 1,
       
       // Maybe pop
-      maybePop: (opts?: { cancelled?: boolean }) => {
+      maybePop: () => {
         if (window.history.length > 1) {
           window.history.back();
           return true;

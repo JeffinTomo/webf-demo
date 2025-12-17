@@ -219,9 +219,7 @@ export default function InviteFriends() {
 // Extend window type for WebF
 declare global {
   interface Window {
-    webf?: {
-      invokeNative?: (method: string, params?: Record<string, unknown>) => Promise<unknown>;
-    };
+    webf?: any;
   }
 }
 
