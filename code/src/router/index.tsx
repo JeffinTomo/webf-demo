@@ -1,15 +1,20 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { Routes, Route } from './webf-router';
 import HomePage from '../pages/home';
 import PointsRecordsPage from '../pages/points-records';
 
-export const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <HomePage />,
-  },
-  {
-    path: '/points-records',
-    element: <PointsRecordsPage />,
-  },
-]);
+/**
+ * App Routes Configuration
+ * Uses WebF-compatible router that works in both WebF and browser environments
+ */
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/points-records" element={<PointsRecordsPage />} />
+    </Routes>
+  );
+}
+
+// Re-export router utilities for convenience
+export { RouterProvider, WebFRouter, WebFRouterLink, useLocation, useParams, isWebFEnvironment } from './webf-router';
 

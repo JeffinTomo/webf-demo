@@ -1,8 +1,15 @@
-import { RouterProvider } from 'react-router-dom';
-import { router } from './router';
+import { RouterProvider, AppRoutes } from './router';
 
+/**
+ * Main App Component
+ * Uses WebF-compatible routing system that works in both WebF and browser environments
+ */
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <RouterProvider>
+      <AppRoutes />
+    </RouterProvider>
+  );
 }
 
 export default App;

@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { WebFRouter } from '../../router';
 
 interface ActivityItemProps {
   title: string;
@@ -67,10 +67,9 @@ function ActivityItem({ title, time, points }: ActivityItemProps) {
 }
 
 export default function Activities() {
-  const navigate = useNavigate();
-
   const handleSeeMore = () => {
-    navigate('/points-records');
+    // Use WebFRouter.push() for better compatibility
+    WebFRouter.push('/points-records');
   };
 
   // Mock activity data

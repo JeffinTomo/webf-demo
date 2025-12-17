@@ -1,12 +1,11 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { WebFListView } from '../../components/webf-listview';
+import { WebFRouter } from '../../router';
 
 export default function PointsRecordsPage() {
-  const navigate = useNavigate();
-
   const handleBack = () => {
-    navigate('/');
+    // Use WebFRouter.back() for better compatibility
+    WebFRouter.back();
   };
 
   // Mock data for demonstration
