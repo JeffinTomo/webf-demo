@@ -31,41 +31,22 @@ export default function HomePage() {
     }
   };
 
-  const handleRefresh = () => {
-    console.log('Refreshing home page...');
-    loadData();
-  };
-
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg text-white">Loading...</div>
-      </div>
-    );
-  }
-
   return (
-    <WebFListView
-      onRefresh={handleRefresh}
-      refresh-style="customCupertino"
-      style={{
-        minHeight: '100vh',
-        paddingBottom: '100px'
-      }}
-    >
-      <div className="max-w-md mx-auto pb-8 pt-4">
-        {myPointsData && (
-          <>
-            <MyPoints
-              points={myPointsData.data.points}
-            />
-            <InviteFriends />
-            <NewUserRequest />
-            <DailyRequest />
-            <Activities />
-          </>
-        )}
+    <WebFListView onRefresh={loadData}>
+      <div className="min-h-screen pb-[100px]">
+        <div className="max-w-md min-h-screen mx-auto pb-8 pt-4">
+          {myPointsData && (
+            <>
+              <MyPoints
+                points={myPointsData.data.points}
+              />
+              <InviteFriends />
+              <NewUserRequest />
+              <DailyRequest />
+              <Activities />
+            </>
+          )}
+        </div>
       </div>
     </WebFListView>
   );
