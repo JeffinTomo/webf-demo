@@ -1,12 +1,11 @@
 interface MyPointsProps {
   points: number;
-  onClick?: () => void;
 }
 
-export default function MyPoints({ points, onClick }: MyPointsProps) {
+export default function MyPoints({ points }: MyPointsProps) {
   return (
     <div
-      className="mx-auto mb-4 rounded-lg cursor-pointer active:opacity-90 transition-opacity"
+      className="mx-auto mb-4 rounded-lg"
       style={{
         height: '100px',
         display: 'flex',
@@ -15,7 +14,6 @@ export default function MyPoints({ points, onClick }: MyPointsProps) {
         alignItems: 'center',
         padding: '20px'
       }}
-      onClick={onClick}
     >
       {/* Title - My WLFI Points */}
       <div

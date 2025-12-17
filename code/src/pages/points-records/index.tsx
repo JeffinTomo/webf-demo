@@ -1,4 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function PointsRecordsPage() {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate('/');
+  };
+
   // Mock data for demonstration
   const recordsData = [
     {
@@ -27,47 +35,110 @@ export default function PointsRecordsPage() {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'flex-start',
-      padding: '50px 0px',
-      gap: '24px',
-      width: 'calc(100% - 40px)',
-      margin: '0 auto',
-      minHeight: '100vh'
+      minHeight: '100vh',
+      paddingTop: "20px",
+      width: '100%'
     }}>
-      {recordsData.map((section, sectionIndex) => (
-        <div key={sectionIndex} style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-start',
-          padding: '0px',
-          width: '100%'
-        }}>
-          {/* Date Header */}
-          <div style={{
+      {/* Top Navigation Bar */}
+      <div style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '10px 20px',
+        gap: '8px',
+        width: '100%',
+        height: '48px',
+        boxSizing: 'border-box',
+      }}>
+        {/* Back Button - Left */}
+        <div
+          onClick={handleBack}
+          style={{
+            width: '24px',
+            height: '24px',
+            cursor: 'pointer',
             display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
             alignItems: 'center',
-            padding: '8px 20px',
-            width: '100%',
-            height: '40px',
-            boxSizing: 'border-box'
-          }}>
-            <span style={{
-              fontWeight: 400,
-              fontSize: '14px',
-              lineHeight: '140%',
-              color: '#79716B'
-            }}>
-              {section.date}
-            </span>
-          </div>
-
-          {/* Records */}
-          {section.records.map((record) => (
-            <RecordItem key={record.id} {...record} />
-          ))}
+            justifyContent: 'center',
+            flexShrink: 0
+          }}
+          className="active:opacity-70 transition-opacity"
+        >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </div>
-      ))}
+
+        {/* Title - Center */}
+        <span style={{
+          fontFamily: 'Sora',
+          fontWeight: 600,
+          fontSize: '18px',
+          lineHeight: '140%',
+          display: 'flex',
+          alignItems: 'center',
+          color: '#D9D9D9'
+        }}>
+          History
+        </span>
+
+        {/* Placeholder - Right (hidden) */}
+        <div style={{
+          width: '24px',
+          height: '24px',
+          visibility: 'hidden',
+          flexShrink: 0
+        }} />
+      </div>
+
+      {/* Content */}
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        padding: '24px 0px',
+        gap: '24px',
+        width: 'calc(100% - 40px)',
+        margin: '0 auto',
+        flex: 1
+      }}>
+        {recordsData.map((section, sectionIndex) => (
+          <div key={sectionIndex} style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            padding: '0px',
+            width: '100%'
+          }}>
+            {/* Date Header */}
+            <div style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: '8px 20px',
+              width: '100%',
+              height: '40px',
+              boxSizing: 'border-box'
+            }}>
+              <span style={{
+                fontWeight: 400,
+                fontSize: '14px',
+                lineHeight: '140%',
+                color: '#79716B'
+              }}>
+                {section.date}
+              </span>
+            </div>
+
+            {/* Records */}
+            {section.records.map((record) => (
+              <RecordItem key={record.id} {...record} />
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

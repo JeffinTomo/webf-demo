@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { apiService } from '../../api';
 import type { MyPointsResponse } from '../../api/types';
 import MyPoints from '../../components/my-points';
 import InviteFriends from '../../components/invite-friends';
 import NewUserRequest from '../../components/new-user-request';
 import DailyRequest from '../../components/daily-request';
+import Activities from '../../components/activities';
 
 /**
  * design figma link: https://www.figma.com/design/YvaX5joHmqZfcFSsHobQ4W/NEW--WLFI-App?node-id=28824-42024&t=6IxeoGDPoZ08pa6k-0
  */
 export default function HomePage() {
-  const navigate = useNavigate();
   const [myPointsData, setMyPointsData] = useState<MyPointsResponse | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -31,9 +30,6 @@ export default function HomePage() {
     }
   };
 
-  const handlePointsClick = () => {
-    navigate('/points-records');
-  };
 
   if (loading) {
     return (
@@ -50,11 +46,11 @@ export default function HomePage() {
           <>
             <MyPoints
               points={myPointsData.data.points}
-              onClick={handlePointsClick}
             />
             <InviteFriends />
             <NewUserRequest />
             <DailyRequest />
+            <Activities />
           </>
         )}
       </div>
