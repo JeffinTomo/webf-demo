@@ -50,3 +50,8 @@ homepage = {
 主要技术要求
 产品使用说明
 ```
+
+## 扩展阅读 vibe coding
+https://www.vibevibe.cn/Basic/01-awakening/
+https://github.com/tukuaiai/vibe-coding-cn
+GitHub Spec Kit：https://github.com/github/spec-kit
