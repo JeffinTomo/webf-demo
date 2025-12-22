@@ -92,6 +92,7 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
         }}
       >
         <span style={{
+          fontFamily: 'Sora',
           fontStyle: 'normal',
           fontWeight: 500,
           fontSize: '16px',
@@ -131,6 +132,7 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
           paddingTop: '8px'
         }}>
           <div style={{
+            fontFamily: 'Sora',
             fontStyle: 'normal',
             fontWeight: 400,
             fontSize: '14px',
