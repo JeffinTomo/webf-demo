@@ -1,12 +1,7 @@
 import { useState } from 'react';
 import { WebFListView } from '../../components/webf-listview';
-import { WebFRouter } from '../../router';
 
 export default function PointsRecordsPage() {
-  const handleBack = () => {
-    // Use WebFRouter.back() for better compatibility
-    WebFRouter.back();
-  };
 
   // Mock data for demonstration
   const initialRecordsData = [
@@ -66,60 +61,6 @@ export default function PointsRecordsPage() {
       width: '100%',
       overflow: 'hidden'
     }}>
-      {/* Top Navigation Bar */}
-      <div style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '10px 20px',
-        gap: '8px',
-        width: '100%',
-        height: '48px',
-        boxSizing: 'border-box',
-        flexShrink: 0
-      }}>
-        {/* Back Button - Left */}
-        <div
-          onClick={handleBack}
-          style={{
-            width: '24px',
-            height: '24px',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0
-          }}
-          className="active:opacity-70 transition-opacity"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18L9 12L15 6" stroke="#D9D9D9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-
-        {/* Title - Center */}
-        <span style={{
-          fontFamily: 'Sora',
-          fontWeight: 600,
-          fontSize: '18px',
-          lineHeight: '140%',
-          display: 'flex',
-          alignItems: 'center',
-          color: '#D9D9D9'
-        }}>
-          History
-        </span>
-
-        {/* Placeholder - Right (hidden) */}
-        <div style={{
-          width: '24px',
-          height: '24px',
-          visibility: 'hidden',
-          flexShrink: 0
-        }} />
-      </div>
-
       {/* Content with WebFListView */}
       <WebFListView
         onRefresh={handleRefresh}
@@ -128,7 +69,7 @@ export default function PointsRecordsPage() {
         style={{
           flex: 1,
           width: '100%',
-          height: 'calc(100vh - 48px)'
+          height: '100vh'
         }}
       >
         <div style={{

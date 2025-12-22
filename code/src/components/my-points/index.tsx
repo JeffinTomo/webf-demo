@@ -7,7 +7,6 @@ export default function MyPoints({ points }: MyPointsProps) {
     <div
       className="mx-auto mb-4 rounded-lg"
       style={{
-        height: '100px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -17,7 +16,6 @@ export default function MyPoints({ points }: MyPointsProps) {
     >
       {/* Title - My WLFI Points */}
       <div
-        className="pt-[70px]"
         style={{
           width: '100%',
           height: '20px',
@@ -25,10 +23,10 @@ export default function MyPoints({ points }: MyPointsProps) {
           fontSize: '14px',
           lineHeight: '140%',
           textAlign: 'center',
-          color: '#79716B'
-        }}
+          color: '#79716B',
+          boxSizing: 'border-box' }}
       >
-        My WLFI Points
+          My WLFI Points
       </div>
 
       {/* Points display with icon */}

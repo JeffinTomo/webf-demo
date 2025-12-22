@@ -14,13 +14,20 @@ import { WebFListView } from '../../components/webf-listview';
  */
 export default function HomePage() {
   const [myPointsData, setMyPointsData] = useState<MyPointsResponse | null>(null);
+  // const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const loadData = async () => {
     try {
+      //  setLoading(true);
       const data = await apiService.getMyPoints();
       setMyPointsData(data);
     } catch (error) {
       console.error('Failed to load my points:', error);
+    } finally {
+      //  setLoading(false);
     }
   };
 

@@ -10,7 +10,7 @@ export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/points-records" element={<PointsRecordsPage />} />
+      <Route path="/points-records" title="History" element={<PointsRecordsPage />} />
     </Routes>
   );
 }

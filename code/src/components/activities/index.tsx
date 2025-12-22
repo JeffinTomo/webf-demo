@@ -159,10 +159,8 @@ export default function Activities() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            position: 'relative'
           }}>
             <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg" style={{
-              position: 'absolute',
               margin: "2px 2px 0 0",
               transform: 'rotate(405deg)'
             }}>
