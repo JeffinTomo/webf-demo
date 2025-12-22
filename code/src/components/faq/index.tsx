@@ -10,32 +10,57 @@ const faqData: FAQItem[] = [
   {
     id: '1',
     question: 'What is WLP?',
-    answer: 'WLP is the WLFI Loyalty Points launched by World Liberty Financial, and users holding WLP will receive mysterious rewards in the future.'
+    answer: 'WLP stands for WLFI Loyalty Points, officially launched by World Liberty Financial. Users who hold WLP will be eligible to receive exclusive rewards in the future.'
   },
   {
     id: '2',
-    question: 'What does it mean when points are in Pending status?',
-    answer: 'Pending status means your points are being processed and will be available soon.'
+    question: 'What does "Pending" status mean?',
+    answer: 'Points are distributed daily at 12:00 AM Estern Time. Points earned before this time will appear as "Pending" and will be officially credited after the daily settlement.'
   },
   {
     id: '3',
-    question: 'What does the countdown next to the daily tasks mean?',
-    answer: 'The countdown shows the time remaining until the daily tasks reset.'
+    question: 'What is the purpose of the countdown in the daily quest?',
+    answer: 'Daily tasks reset at 12:00 AM Estern Time. If the daily point cap has been reached, you can resume earning points after the reset.'
   },
   {
     id: '4',
-    question: 'Why is there a limit on the points that can be earned daily?',
-    answer: 'Daily limits help ensure fair distribution of rewards and maintain the value of the loyalty program.'
+    question: 'Why is there a daily limit on points?',
+    answer: 'To keep the system fair for everyone, we\'ve set a daily points cap. After reaching the limit, you can continue earning points after the reset at 12:00 AM Estern Time.'
   },
   {
     id: '5',
-    question: 'Why is there a limit?',
-    answer: 'Limits are set to ensure sustainable reward distribution and prevent abuse of the system.'
+    question: 'How do I earn rewards by inviting friends?',
+    answer: 'Click "Invite Friend" to share your invitation. When your referred friends earn points, you\'ll automatically receive 25% of their points as a reward.'
   },
   {
     id: '6',
-    question: 'Why is there a limit on the points that can be earned daily?',
-    answer: 'Daily earning limits help maintain the integrity and long-term sustainability of the rewards program.'
+    question: 'What do the numbers (e.g., 340/340) in daily tasks mean?',
+    answer: 'The format is: [Points Earned] / [Daily Limit]\n\nExamples:\n• 340 / 340: Daily limit reached.\n• 0 / 340: You can continue earning points until you reach the daily limit.'
+  },
+  // {
+  //   id: '7',
+  //   question: 'What is USD1?',
+  //   answer: 'USD1 is a stablecoin by World Liberty Financial, pegged 1:1 to the US Dollar.\n\nYou earn WLP by trading or holding USD1. Larger amounts generate more points.'
+  // },
+  {
+    id: '8',
+    question: 'Is WLP backed by or tied to any monetary value or exchange rate?',
+    answer: 'No. WLP serves only as a proof of loyalty. WLFI makes no guarantees regarding WLP\'s future value, exchange ratios, or financial monetization of WLP.'
+  },
+  {
+    id: '9',
+    question: 'Can I transfer or trade WLP points?',
+    answer: 'No. WLP points are tied to your account and cannot be transferred, traded, or withdrawn.'
+  },
+  {
+    id: '10',
+    question: 'Can I join the loyalty program with more than one account?',
+    answer: 'Only one account per device is permitted. Malicious activities (e.g., point farming, batch registrations) are strictly prohibited. Any violations may result in point forfeiture or permanent account suspension.'
+  },
+  {
+    id: '11',
+    question: 'What is the difference between "Trade any token" and "Trade USD1"?',
+    answer: '• Swap any trading pair: Swapping ANY tokens earns you base points.\n\n• Trade USD1: This requires USD1 in the trading pair and grants bonus WLP rewards in addition to the base points.'
   }
 ];
 
@@ -67,7 +92,7 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
         }}
       >
         <span style={{
-          fontFamily: 'Sora',
+          fontStyle: 'normal',
           fontWeight: 500,
           fontSize: '16px',
           lineHeight: '140%',
@@ -105,17 +130,16 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
           width: '100%',
           paddingTop: '8px'
         }}>
-          <span style={{
-            fontFamily: 'Sora',
+          <div style={{
+            fontStyle: 'normal',
             fontWeight: 400,
             fontSize: '14px',
             lineHeight: '140%',
             color: '#A9A29D',
-            display: 'flex',
-            alignItems: 'center'
+            whiteSpace: 'pre-line'
           }}>
             {item.answer}
-          </span>
+          </div>
         </div>
       )}
     </div>
@@ -189,7 +213,7 @@ export default function FAQ() {
           </div>
 
           <span style={{
-            fontFamily: 'Sora',
+            fontStyle: 'normal',
             fontWeight: 600,
             fontSize: '20px',
             lineHeight: '140%',
