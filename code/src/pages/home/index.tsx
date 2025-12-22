@@ -6,6 +6,7 @@ import InviteFriends from '../../components/invite-friends';
 import NewUserRequest from '../../components/new-user-request';
 import DailyRequest from '../../components/daily-request';
 import Activities from '../../components/activities';
+import FAQ from '../../components/faq';
 import { WebFListView } from '../../components/webf-listview';
 
 /**
@@ -13,23 +14,19 @@ import { WebFListView } from '../../components/webf-listview';
  */
 export default function HomePage() {
   const [myPointsData, setMyPointsData] = useState<MyPointsResponse | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   const loadData = async () => {
     try {
-      setLoading(true);
       const data = await apiService.getMyPoints();
       setMyPointsData(data);
     } catch (error) {
       console.error('Failed to load my points:', error);
-    } finally {
-      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <WebFListView onRefresh={loadData}>
@@ -44,6 +41,9 @@ export default function HomePage() {
               <NewUserRequest />
               <DailyRequest />
               <Activities />
+
+              <div className='h-[40px]'></div>
+              <FAQ />
             </>
           )}
         </div>

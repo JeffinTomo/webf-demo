@@ -7,6 +7,9 @@ npm create vite@latest
 
 
 
+css 命令选择：https://openwebf.com/en/docs/developer-guide/css
+
+
 ## 代码风格
 
 参考：https://github.com/tomo-inc/tomo-wallet/tree/main/apps/mydoge-app/src/pages/dapp-btc
