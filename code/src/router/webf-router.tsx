@@ -28,7 +28,7 @@ import {
 const isWebF = typeof window !== 'undefined' && !!(window as any).webf;
 
 // WebF library will be imported dynamically in production
-let WebFLib: any = null;
+const WebFLib: any = null;
 if (isWebF) {
   try {
     // In production, this would be: import('@openwebf/react-router')
@@ -82,12 +82,12 @@ export const RouterProvider: React.FC<PropsWithChildren<{}>> = ({ children }) =>
 /**
  * Hooks - Auto-select based on environment
  */
-export const useParams: typeof RRDUseParams = isWebF && WebFLib 
-  ? WebFLib.useParams 
+export const useParams: typeof RRDUseParams = isWebF && WebFLib
+  ? WebFLib.useParams
   : RRDUseParams;
 
-export const useLocation: typeof RRDUseLocation = isWebF && WebFLib 
-  ? WebFLib.useLocation 
+export const useLocation: typeof RRDUseLocation = isWebF && WebFLib
+  ? WebFLib.useLocation
   : RRDUseLocation;
 
 /**
@@ -109,11 +109,11 @@ type WebFRouterLinkProps = PropsWithChildren<{
 export const WebFRouterLink: React.FC<WebFRouterLinkProps> = isWebF && WebFLib
   ? WebFLib.WebFRouterLink
   : ({ path, children, onScreen }: WebFRouterLinkProps) => {
-      useEffect(() => {
-        onScreen?.();
-      }, [onScreen]);
-      return <RRDLink to={path}>{children}</RRDLink>;
-    };
+    useEffect(() => {
+      onScreen?.();
+    }, [onScreen]);
+    return <RRDLink to={path}>{children}</RRDLink>;
+  };
 
 /**
  * WebFRouter API
@@ -122,52 +122,52 @@ export const WebFRouterLink: React.FC<WebFRouterLinkProps> = isWebF && WebFLib
 export const WebFRouter = isWebF && WebFLib
   ? WebFLib.WebFRouter
   : {
-      // Push a new route onto the stack
-      pushState: (state: any, path: string) => navigateImpl(path, { state }),
-      
-      // Replace current route
-      replaceState: (state: any, path: string) => navigateImpl(path, { replace: true, state }),
-      
-      // Go back
-      back: () => window.history.back(),
-      
-      // Async push
-      push: async (path: string, state?: any) => {
-        navigateImpl(path, { state });
+    // Push a new route onto the stack
+    pushState: (state: any, path: string) => navigateImpl(path, { state }),
+
+    // Replace current route
+    replaceState: (state: any, path: string) => navigateImpl(path, { replace: true, state }),
+
+    // Go back
+    back: () => window.history.back(),
+
+    // Async push
+    push: async (path: string, state?: any) => {
+      navigateImpl(path, { state });
+      return true;
+    },
+
+    // Async replace
+    replace: async (path: string, state?: any) => {
+      navigateImpl(path, { replace: true, state });
+      return true;
+    },
+
+    // Pop and push (replace current)
+    popAndPushNamed: async (path: string, state?: any) => {
+      navigateImpl(path, { replace: true, state });
+      return true;
+    },
+
+    // Check if can pop
+    canPop: () => window.history.length > 1,
+
+    // Maybe pop
+    maybePop: () => {
+      if (window.history.length > 1) {
+        window.history.back();
         return true;
-      },
-      
-      // Async replace
-      replace: async (path: string, state?: any) => {
-        navigateImpl(path, { replace: true, state });
-        return true;
-      },
-      
-      // Pop and push (replace current)
-      popAndPushNamed: async (path: string, state?: any) => {
-        navigateImpl(path, { replace: true, state });
-        return true;
-      },
-      
-      // Check if can pop
-      canPop: () => window.history.length > 1,
-      
-      // Maybe pop
-      maybePop: () => {
-        if (window.history.length > 1) {
-          window.history.back();
-          return true;
-        }
-        return false;
-      },
-      
-      // Restorable pop and push
-      restorablePopAndPushNamed: async (path: string, state?: any) => {
-        const restorationId = Date.now();
-        navigateImpl(path, { state: { ...(state || {}), restorationId } });
-        return restorationId;
-      },
-    };
+      }
+      return false;
+    },
+
+    // Restorable pop and push
+    restorablePopAndPushNamed: async (path: string, state?: any) => {
+      const restorationId = Date.now();
+      navigateImpl(path, { state: { ...(state || {}), restorationId } });
+      return restorationId;
+    },
+  };
 
 /**
  * Environment detection
@@ -177,9 +177,13 @@ export const isWebFEnvironment = isWebF;
 /**
  * Type declarations for window.webf
  */
+interface WebFInterface {
+  invokeNative?: (method: string, params?: Record<string, unknown>) => Promise<unknown>;
+}
+
 declare global {
   interface Window {
-    webf?: any;
+    webf?: WebFInterface;
   }
 }
 
