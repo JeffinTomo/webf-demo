@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import type { ActivityItem } from '../../api/types';
+import star2Icon from '../../assets/star2.png';
 
 export default function NewUserRequest() {
   const activity = {
@@ -40,10 +41,10 @@ export default function NewUserRequest() {
         height: '28px'
       }}>
         {/* Medal Icon */}
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 15C15.866 15 19 11.866 19 8C19 4.13401 15.866 1 12 1C8.13401 1 5 4.13401 5 8C5 11.866 8.13401 15 12 15Z" stroke="#FAFAF9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M8.21 13.89L7 23L12 20L17 23L15.79 13.88" stroke="#FAFAF9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <svg width="16" height="21" viewBox="0 0 16 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 5.001C12.4183 5.001 16 8.58271 16 13.001C16 17.4193 12.4183 21.001 8 21.001C3.58172 21.001 0 17.4193 0 13.001C0 8.58271 3.58172 5.001 8 5.001ZM8 7.001C4.68629 7.001 2 9.68731 2 13.001C2 16.3147 4.68629 19.001 8 19.001C11.3137 19.001 14 16.3147 14 13.001C14 9.68731 11.3137 7.001 8 7.001ZM8 8.50101L9.3225 11.1807L12.2798 11.6104L10.1399 13.6963L10.645 16.6416L8 15.251L5.35497 16.6416L5.86012 13.6963L3.72025 11.6104L6.6775 11.1807L8 8.50101ZM14 0.000999928V3.001L12.6366 4.13856C11.5305 3.55871 10.3025 3.17985 9.0011 3.05049L9 0L14 0.000999928ZM7 0L6.9997 3.0504C5.6984 3.17964 4.47046 3.55836 3.36441 4.13804L2 3.001V0.000999928L7 0Z" fill="#FAFAF9" />
         </svg>
+
 
         <div style={{
           display: 'flex',
@@ -62,10 +63,10 @@ export default function NewUserRequest() {
           </span>
 
           {/* Question Icon */}
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="7" cy="7" r="6" stroke="#79716B" strokeWidth="1.16667" />
-            <path d="M7 6V7M7 10H7.01" stroke="#79716B" strokeWidth="1.16667" strokeLinecap="round" />
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.71926 4.66639C4.8564 4.27653 5.1271 3.94778 5.4834 3.73838C5.8397 3.52898 6.25861 3.45244 6.66595 3.5223C7.07328 3.59217 7.44274 3.80394 7.70889 4.12011C7.97504 4.43628 8.12071 4.83644 8.12009 5.24972C8.12009 6.41639 6.37009 6.99972 6.37009 6.99972M6.41671 9.33301H6.42254M12.25 6.41634C12.25 9.638 9.63837 12.2497 6.41671 12.2497C3.19505 12.2497 0.583374 9.638 0.583374 6.41634C0.583374 3.19468 3.19505 0.583008 6.41671 0.583008C9.63837 0.583008 12.25 3.19468 12.25 6.41634Z" stroke="#79716B" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
+
         </div>
       </div>
 
@@ -91,6 +92,21 @@ export default function NewUserRequest() {
           boxSizing: 'border-box'
         }}
       >
+        <div style={{
+          position: 'absolute',
+          top: '-12px',
+          right: '0',
+          width: '96px',
+          height: '100%',
+          opacity: 0.2,
+          zIndex: 1
+        }}>
+          <img
+            src={star2Icon}
+            alt="Star icon"
+            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+          />
+        </div>
 
         {/* Content */}
         <div style={{

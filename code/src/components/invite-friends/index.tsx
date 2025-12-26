@@ -75,7 +75,7 @@ export default function InviteFriends() {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: '40px auto 20px',
+        margin: '10px auto 20px',
         padding: '20px',
         gap: '20px',
         background: 'linear-gradient(121.99deg, rgba(37, 24, 6, 0.43) 0%, rgba(60, 47, 23, 0.75) 99.79%)',
@@ -140,7 +140,7 @@ export default function InviteFriends() {
         </svg>
 
         <span style={{ fontWeight: 600, fontSize: '16px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#171412' }}>
-          Invite friend
+          Invite friends
         </span>
       </button>
 
