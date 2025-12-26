@@ -106,7 +106,6 @@ export default function DailyRequest() {
       {/* Card 1: Purchase crypto - Completed */}
       <ActivityCard
         icon="purchase"
-        iconText="69"
         title="Purchase crypto"
         subtitle=""
         progress={{ current: 340, total: 340 }}
@@ -140,7 +139,6 @@ export default function DailyRequest() {
 // Activity Card Component
 interface ActivityCardProps {
   icon: string;
-  iconText?: string;
   title: string;
   subtitle?: string;
   progress: { current: number; total: number };
@@ -148,7 +146,7 @@ interface ActivityCardProps {
   onClick: () => void;
 }
 
-function ActivityCard({ icon, iconText, title, progress, status, onClick }: ActivityCardProps) {
+function ActivityCard({ icon, title, progress, status, onClick }: ActivityCardProps) {
   const progressPercent = (progress.current / progress.total) * 100;
   const isCompleted = status === 'completed';
   // const isActive = status === 'active';
@@ -191,7 +189,7 @@ function ActivityCard({ icon, iconText, title, progress, status, onClick }: Acti
           height: '42px'
         }}>
           {/* Icon */}
-          {renderIcon(icon, iconText)}
+          {renderIcon(icon)}
 
           {/* Text Content */}
           <div style={{
@@ -275,7 +273,7 @@ function ActivityCard({ icon, iconText, title, progress, status, onClick }: Acti
 }
 
 // Icon renderer function
-function renderIcon(icon: string, iconText?: string) {
+function renderIcon(icon: string) {
   const iconSize = { width: '40px', height: '40px' };
 
   if (icon === 'purchase') {
@@ -286,11 +284,12 @@ function renderIcon(icon: string, iconText?: string) {
         justifyContent: 'center',
         alignItems: 'center',
         background: '#292524',
-        borderRadius: '4px'
+        borderRadius: '50%'
       }}>
-        <span style={{ fontSize: '16px', fontWeight: '500', color: '#FFFFFF' }}>
-          {iconText || '69'}
-        </span>
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 40C8.95431 40 0 31.0458 0 20C0 8.95432 8.95431 0 20 0C31.0456 0 40 8.95432 40 20C40 31.0458 31.0456 40 20 40Z" fill="#292524" />
+          <path d="M15 29.5C12.5147 29.5 10.5 27.4853 10.5 25C10.5 22.5147 12.5147 20.5 15 20.5C17.4853 20.5 19.5 22.5147 19.5 25C19.5 27.4853 17.4853 29.5 15 29.5ZM25 19.5C22.5147 19.5 20.5 17.4853 20.5 15C20.5 12.5147 22.5147 10.5 25 10.5C27.4853 10.5 29.5 12.5147 29.5 15C29.5 17.4853 27.4853 19.5 25 19.5ZM15 27.5C16.3807 27.5 17.5 26.3807 17.5 25C17.5 23.6193 16.3807 22.5 15 22.5C13.6193 22.5 12.5 23.6193 12.5 25C12.5 26.3807 13.6193 27.5 15 27.5ZM25 17.5C26.3807 17.5 27.5 16.3807 27.5 15C27.5 13.6193 26.3807 12.5 25 12.5C23.6193 12.5 22.5 13.6193 22.5 15C22.5 16.3807 23.6193 17.5 25 17.5ZM11 16C11 13.2386 13.2386 11 16 11H19V13H16C14.3432 13 13 14.3432 13 16V19H11V16ZM29 21H27V24C27 25.6569 25.6569 27 24 27H21V29H24C26.7614 29 29 26.7614 29 24V21Z" fill="white" />
+        </svg>
       </div>
     );
   }
@@ -306,9 +305,11 @@ function renderIcon(icon: string, iconText?: string) {
         borderRadius: '88.8889px',
         position: 'relative'
       }}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="10" stroke="#FFFFFF" strokeWidth="2" fill="none" />
-          <path d="M12 6V12L16 14" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="20" fill="#292524" />
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M19.9997 10.83C16.3434 10.83 13.3793 13.794 13.3793 17.4504C13.3793 19.3686 14.1938 21.095 15.4988 22.3055L14.1136 23.799C12.4104 22.2192 11.3423 19.9588 11.3423 17.4504C11.3423 12.669 15.2183 8.79297 19.9997 8.79297C24.781 8.79297 28.6571 12.669 28.6571 17.4504C28.6571 21.2215 26.2465 24.4269 22.8854 25.6149L22.2066 23.6943C24.7793 22.785 26.6201 20.3313 26.6201 17.4504C26.6201 13.794 23.656 10.83 19.9997 10.83Z" fill="white" />
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M15.6343 14.9111C15.2104 15.2808 15.1664 15.9242 15.5362 16.3481L18.2539 19.4643C18.4625 19.7035 18.7706 19.8317 19.0873 19.8112C19.404 19.7908 19.693 19.6239 19.869 19.3598L21.1898 17.3786L22.9134 19.4469C23.2735 19.879 23.9157 19.9374 24.3479 19.5773C24.78 19.2172 24.8384 18.5749 24.4783 18.1428L21.8818 15.027C21.676 14.7802 21.3656 14.6445 21.0447 14.6616C20.7238 14.6788 20.4298 14.8463 20.2515 15.1137L18.9133 17.1211L17.0714 15.0092C16.7016 14.5853 16.0583 14.5414 15.6343 14.9111Z" fill="white" />
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M26.7045 21.7217C27.9055 20.8207 29.6222 21.157 30.3947 22.4444C31.035 23.5116 30.8047 24.8861 29.8513 25.6862L25.2777 29.5249C23.9843 30.6104 22.3498 31.2054 20.6613 31.2054H9.30612C8.7436 31.2054 8.2876 30.7494 8.2876 30.1869C8.2876 29.6244 8.7436 29.1684 9.30612 29.1684H20.6613C21.8708 29.1684 23.0417 28.7422 23.9681 27.9646L28.5417 24.1259C28.728 23.9696 28.7731 23.701 28.6479 23.4924C28.497 23.2408 28.1615 23.1751 27.9268 23.3512L23.1653 26.9229C22.9849 27.0582 22.7654 27.1314 22.5399 27.1314H18.7914C18.2289 27.1314 17.7728 26.6754 17.7728 26.1129C17.7728 25.5503 18.2289 25.0943 18.7914 25.0943H20.9016L20.8982 24.0758H15.5331C14.7419 24.0758 14.0223 24.5339 13.6874 25.2508L13.2206 26.2502C12.9695 26.7878 12.4298 27.1314 11.8364 27.1314H9.30612C8.7436 27.1314 8.2876 26.6754 8.2876 26.1129C8.2876 25.5503 8.7436 25.0943 9.30612 25.0943H11.5122L11.8418 24.3887C12.5115 22.955 13.9507 22.0388 15.5331 22.0388H21.001C22.0666 22.0388 22.9315 22.9008 22.9349 23.9665L22.9368 24.5478L26.7045 21.7217Z" fill="white" />
         </svg>
       </div>
     );
@@ -322,14 +323,17 @@ function renderIcon(icon: string, iconText?: string) {
         justifyContent: 'center',
         alignItems: 'center',
         background: '#292524',
-        borderRadius: '88.8889px',
+        borderRadius: '50%',
+        width: '40px',
         position: 'relative'
       }}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="8" width="16" height="12" rx="2" stroke="#FFFFFF" strokeWidth="2" fill="none" />
-          <path d="M8 8V6C8 4.89543 8.89543 4 10 4H14C15.1046 4 16 4.89543 16 6V8" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="12" cy="14" r="2" stroke="#FFFFFF" strokeWidth="2" fill="none" />
+        <svg width="36" height="36" viewBox="-2 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="40" height="40" rx="20" fill="#292524" />
+          <rect x="9.70801" y="14.25" width="19.8713" height="14.5723" rx="2" stroke="white" stroke-width="2" />
+          <path d="M21.8809 19.8047C21.8809 19.2524 22.3286 18.8047 22.8809 18.8047H28.7805V24.2578H22.8809C22.3286 24.2578 21.8809 23.8101 21.8809 23.2578V19.8047Z" stroke="white" stroke-width="2" />
+          <path d="M22.8818 14.313C22.8818 11.5427 20.636 9.29688 17.8657 9.29688C15.0954 9.29688 12.8496 11.5427 12.8496 14.313" stroke="white" stroke-width="2" />
         </svg>
+
       </div>
     );
   }
