@@ -1,14 +1,21 @@
 import { useState, useEffect } from 'react';
 import ReferralCode from '../referral-code';
+import { userAPIs } from '../../api/api';
 
 export default function InviteFriends() {
   const [friendsReferred] = useState(0);
   const [pointsEarned] = useState(0);
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
   const [showReferralCode, setShowReferralCode] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
 
   // Timer countdown effect
   useEffect(() => {
+    userAPIs.getUserInfo().then((res) => {
+      console.log('User info:', res);
+      setUserInfo(res);
+    });
+
     const interval = setInterval(() => {
       setTimer((prev) => {
         let { days, hours, minutes, seconds } = prev;
@@ -65,19 +72,21 @@ export default function InviteFriends() {
     setShowReferralCode(true);
   };
 
-  const handleReferralCodeConfirm = (code: string) => {
-    console.log('Referral code confirmed:', code);
+  const handleReferralCodeConfirm = async (inviteCodeByReferral: string) => {
+    console.log('Referral code confirmed:', inviteCodeByReferral);
     // Handle referral code submission
     // You can add API call here
+
+    const res = await userAPIs.setInviteCode({ inviteCodeByReferral });
+    console.log('Referral code submitted successfully:', res);
   };
 
   const handleReferralCodeClose = () => {
     setShowReferralCode(false);
   };
 
-  const isBinded = Math.random() < 0.5;
-
-  return (<>
+  const isBinded = false;
+  return (<>{JSON.stringify(userInfo || {})}
     <div
       id="invite-friends"
       style={{

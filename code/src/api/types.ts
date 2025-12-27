@@ -28,3 +28,36 @@ export interface ActivitiesResponse {
   };
 }
 
+// Request/Response types for referral code API
+export interface SetInviteCodeRequest {
+  inviteCodeByReferral: string;
+}
+
+export interface SetInviteCodeResponse {
+  code: number;
+  data?: {
+    success: boolean;
+    message?: string;
+  };
+  message?: string;
+}
+
+// Request/Response types for user info API
+export interface GetUserInfoResponse {
+  code: number;
+  data?: {
+    inviteCount?: number;
+    friendsReferred?: number;
+    pointsEarned?: number;
+    [key: string]: unknown;
+  };
+  message?: string;
+}
+
+// Generic API response type
+export interface RequestType<T> {
+  code: number;
+  data?: T;
+  message?: string;
+}
+
