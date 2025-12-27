@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import ReferralCode from '../referral-code';
 import { userAPIs } from '../../api/api';
+import type { RequestType, GetUserInfoResponse } from '../../api/types';
 
 export default function InviteFriends() {
   const [friendsReferred] = useState(0);
   const [pointsEarned] = useState(0);
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
   const [showReferralCode, setShowReferralCode] = useState(false);
-  const [userInfo, setUserInfo] = useState(null);
+  const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null>(null);
 
   // Timer countdown effect
   useEffect(() => {
