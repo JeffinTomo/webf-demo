@@ -41,6 +41,7 @@ export default function InviteFriends() {
             throw new Error('Code is required');
           }
           setReferralCode(code);
+          setShowReferralCode(true);
         });
 
         methodChannel.addMethodCallHandler('refreshData', () => {
