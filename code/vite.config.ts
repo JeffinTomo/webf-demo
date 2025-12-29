@@ -6,5 +6,9 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     preserveSymlinks: true,
+    dedupe: ['@wlfi/webf-point'],
+  },
+  optimizeDeps: {
+    exclude: ['@wlfi/webf-point'],
   },
 })
