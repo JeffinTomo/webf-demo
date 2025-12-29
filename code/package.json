@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
+    "prebuild": "cd webf-modules/webf-point && pnpm build || true",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
