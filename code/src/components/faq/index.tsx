@@ -9,58 +9,48 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     id: '1',
-    question: 'What is WLP?',
-    answer: 'WLP stands for WLFI Loyalty Points, officially launched by World Liberty Financial. Users who hold WLP will be eligible to receive exclusive rewards in the future.'
+    question: 'What is the WLFI Points Program?',
+    answer: 'The WLFI Points Program is officially launched by World Liberty Financial. Users who hold the WLFI points will be eligible to receive exclusive rewards in the future.'
   },
   {
     id: '2',
-    question: 'What does "Pending" status mean?',
-    answer: 'Points are distributed daily at 12:00 AM Estern Time. Points earned before this time will appear as "Pending" and will be officially credited after the daily settlement.'
+    question: 'Why is there a daily limit on points?',
+    answer: 'To keep the WLFI Points Program fair for everyone, a daily points cap for each quest has been set. After reaching the limit, you can continue earning points after the reset at 12:00 AM Eastern Time.'
   },
   {
     id: '3',
     question: 'What is the purpose of the countdown in the daily quest?',
-    answer: 'Daily tasks reset at 12:00 AM Estern Time. If the daily point cap has been reached, you can resume earning points after the reset.'
+    answer: 'Points earned from each daily quest reset at 12:00 AM Eastern Time. If you\'ve reached the daily point cap, you can resume earning points after the reset. The countdown indicates the time remaining until the next reset at 12:00 AM Eastern Time.'
   },
   {
     id: '4',
-    question: 'Why is there a daily limit on points?',
-    answer: 'To keep the system fair for everyone, we\'ve set a daily points cap. After reaching the limit, you can continue earning points after the reset at 12:00 AM Estern Time.'
+    question: 'What does "Pending" status mean?',
+    answer: 'Points are settled daily at 12:00 AM Eastern Time. Points earned before this time appear as "Pending" and will be officially credited after the daily settlement.'
   },
   {
     id: '5',
     question: 'How do I earn rewards by inviting friends?',
-    answer: 'Click "Invite Friend" to share your invitation. When your referred friends earn points, you\'ll automatically receive 25% of their points as a reward.'
+    answer: 'Click "Invite Friend" to share your invitation code. (Your friends must enter the code within 7 days of joining the program.) Once they do, you\'ll automatically earn 25% of their points as a reward whenever they earn points.'
   },
   {
     id: '6',
-    question: 'What do the numbers (e.g., 340/340) in daily tasks mean?',
-    answer: 'The format is: [Points Earned] / [Daily Limit]\n\nExamples:\n• 340 / 340: Daily limit reached.\n• 0 / 340: You can continue earning points until you reach the daily limit.'
+    question: 'What do the numbers (e.g., 340/340) in daily quests mean?',
+    answer: 'The format is: [Points Earned] / [Daily Limit]\n\nExamples:\n• 0 / 340: You can continue earning points until you reach the daily limit.\n• 340 / 340: Daily limit reached.'
   },
-  // {
-  //   id: '7',
-  //   question: 'What is USD1?',
-  //   answer: 'USD1 is a stablecoin by World Liberty Financial, pegged 1:1 to the US Dollar.\n\nYou earn WLP by trading or holding USD1. Larger amounts generate more points.'
-  // },
+  {
+    id: '7',
+    question: 'Are WLFI points backed by or linked to any monetary value or exchange rate?',
+    answer: 'No. WLFI makes no guarantees regarding its future value or financial monetization.'
+  },
   {
     id: '8',
-    question: 'Is WLP backed by or tied to any monetary value or exchange rate?',
-    answer: 'No. WLP serves only as a proof of loyalty. WLFI makes no guarantees regarding WLP\'s future value, exchange ratios, or financial monetization of WLP.'
+    question: 'Can I transfer or trade points?',
+    answer: 'No. Points are tied to your account and cannot be transferred, traded, or withdrawn.'
   },
   {
     id: '9',
-    question: 'Can I transfer or trade WLP points?',
-    answer: 'No. WLP points are tied to your account and cannot be transferred, traded, or withdrawn.'
-  },
-  {
-    id: '10',
-    question: 'Can I join the loyalty program with more than one account?',
-    answer: 'Only one account per device is permitted. Malicious activities (e.g., point farming, batch registrations) are strictly prohibited. Any violations may result in point forfeiture or permanent account suspension.'
-  },
-  {
-    id: '11',
-    question: 'What is the difference between "Trade any token" and "Trade USD1"?',
-    answer: '• Swap any trading pair: Swapping ANY tokens earns you base points.\n\n• Trade USD1: This requires USD1 in the trading pair and grants bonus WLP rewards in addition to the base points.'
+    question: 'Can I join the program with more than one account?',
+    answer: 'Only one account per device is permitted.\nMalicious activities (e.g., point farming, batch registrations) are strictly prohibited. Any violations may result in point forfeiture or account suspension.'
   }
 ];
 
