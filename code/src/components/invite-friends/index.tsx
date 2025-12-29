@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import ReferralCode from '../referral-code';
 import { userAPIs } from '../../api/api';
-import type { RequestType, GetUserInfoResponse } from '../../api/types';
+import type { RequestType, GetUserInfoResponse, GetInviteInfoResponse } from '../../api/types';
+import { WebFPoint } from '@wlfi/webf-point';
 
 export default function InviteFriends() {
   const [friendsReferred] = useState(0);
@@ -9,12 +10,19 @@ export default function InviteFriends() {
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
   const [showReferralCode, setShowReferralCode] = useState(false);
   const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null>(null);
+  const [inviteInfo, setInviteInfo] = useState<RequestType<GetInviteInfoResponse["data"]> | null>(null);
 
   // Timer countdown effect
   useEffect(() => {
+    console.log('Getting user info...', userInfo, inviteInfo);
     userAPIs.getUserInfo().then((res) => {
       console.log('User info:', res);
       setUserInfo(res);
+    });
+
+    userAPIs.getInviteInfo().then((res) => {
+      console.log('Invite info:', res);
+      setInviteInfo(res);
     });
 
     const interval = setInterval(() => {
@@ -42,31 +50,10 @@ export default function InviteFriends() {
     return () => clearInterval(interval);
   }, []);
 
+
   const handleInvite = async () => {
-    // Call Flutter system module to share app link + current user code
-    if (window.webf && window.webf.invokeNative) {
-      try {
-        const userCode = 'USER123'; // This should come from user context
-        const appLink = `https://app.example.com/invite?code=${userCode}`;
-        await window.webf.invokeNative('share', {
-          text: `Join me on this app! Use my code: ${userCode}`,
-          url: appLink,
-        });
-      } catch (error) {
-        console.error('Failed to share:', error);
-        // Fallback: copy to clipboard
-        const userCode = 'USER123';
-        const appLink = `https://app.example.com/invite?code=${userCode}`;
-        navigator.clipboard.writeText(appLink);
-        alert('Link copied to clipboard!');
-      }
-    } else {
-      // Fallback for web
-      const userCode = 'USER123';
-      const appLink = `https://app.example.com/invite?code=${userCode}`;
-      navigator.clipboard.writeText(appLink);
-      alert('Link copied to clipboard!');
-    }
+    const res = await WebFPoint.shareInviteCode({ code: 'TEST123' });
+    console.log('Share invite code result:', res);
   };
 
   const handleEnterCode = () => {
@@ -87,7 +74,7 @@ export default function InviteFriends() {
   };
 
   const isBinded = false;
-  return (<>{JSON.stringify(userInfo || {})}
+  return (<>
     <div
       id="invite-friends"
       style={{

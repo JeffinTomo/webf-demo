@@ -54,6 +54,29 @@ export interface GetUserInfoResponse {
   message?: string;
 }
 
+// Request/Response types for invite info API
+export interface GetInviteInfoResponse {
+  code: number;
+  msg: string;
+  timestamp: number;
+  data: {
+    walletId: string;
+    inviteCode: string;
+    totalPts: number;
+    ptsBySelf: number;
+    ptsByReferral: number;
+    ptsLast24h: number;
+    status: number;
+    referrerWalletId: string;
+    comment: string;
+    createdAt: string;
+    updatedAt: string;
+    referralSharePtsPercent: number;
+    referralWalletAvatar: string;
+    referralWalletName: string;
+  };
+}
+
 // Generic API response type
 export interface RequestType<T> {
   code: number;
