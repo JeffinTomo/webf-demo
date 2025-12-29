@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 
 interface ReferralCodeProps {
+  referralCode: string;
   isOpen: boolean;
   onClose: () => void;
   onConfirm: (code: string) => void;
 }
 
-export default function ReferralCode({ isOpen, onClose, onConfirm }: ReferralCodeProps) {
-  const [code, setCode] = useState('3Rt89');
+export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode }: ReferralCodeProps) {
+  const [code, setCode] = useState(referralCode);
 
   useEffect(() => {
     if (isOpen) {

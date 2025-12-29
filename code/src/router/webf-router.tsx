@@ -177,7 +177,12 @@ export const isWebFEnvironment = isWebF;
 /**
  * Type declarations for window.webf
  */
+interface WebFMethodChannel {
+  addMethodCallHandler: (method: string, handler: (params?: Record<string, unknown>) => void) => void;
+}
+
 interface WebFInterface {
+  methodChannel?: WebFMethodChannel;
   invokeNative?: (method: string, params?: Record<string, unknown>) => Promise<unknown>;
 }
 

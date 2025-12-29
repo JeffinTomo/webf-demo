@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ReferralCode from '../referral-code';
 import { userAPIs } from '../../api/api';
 import type { RequestType, GetUserInfoResponse, GetInviteInfoResponse } from '../../api/types';
@@ -12,9 +12,7 @@ export default function InviteFriends() {
   const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null>(null);
   const [inviteInfo, setInviteInfo] = useState<RequestType<GetInviteInfoResponse["data"]> | null>(null);
 
-  // Timer countdown effect
-  useEffect(() => {
-    console.log('Getting user info...', userInfo, inviteInfo);
+  const refreshUserData = useCallback(async () => {
     userAPIs.getUserInfo().then((res) => {
       console.log('User info:', res);
       setUserInfo(res);
@@ -24,7 +22,37 @@ export default function InviteFriends() {
       console.log('Invite info:', res);
       setInviteInfo(res);
     });
+  }, []);
+  console.log('Getting user info...', userInfo, inviteInfo);
 
+
+  const [referralCode, setReferralCode] = useState<string>('');
+  // Timer countdown effect
+  useEffect(() => {
+    // Check if webf is available (WebF environment)
+    if (typeof window !== 'undefined' && window.webf?.methodChannel) {
+      const webf = window.webf;
+      const methodChannel = webf.methodChannel;
+
+      if (methodChannel) {
+        methodChannel.addMethodCallHandler('receiveReferralCode', (params?: { code?: string }) => {
+          const code = params?.code;
+          if (!code) {
+            throw new Error('Code is required');
+          }
+          setReferralCode(code);
+        });
+
+        methodChannel.addMethodCallHandler('refreshData', () => {
+          refreshUserData();
+        });
+      }
+    }
+    refreshUserData();
+  }, [refreshUserData]);
+
+  // Timer countdown effect
+  useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prev) => {
         let { days, hours, minutes, seconds } = prev;
@@ -51,10 +79,15 @@ export default function InviteFriends() {
   }, []);
 
 
-  const handleInvite = async () => {
-    const res = await WebFPoint.shareInviteCode({ code: 'TEST123' });
+
+  const handleInvite = async (code: string) => {
+    if (!code) {
+      throw new Error('Code is required');
+    }
+    const res = await WebFPoint.shareInviteCode({ code });
     console.log('Share invite code result:', res);
   };
+
 
   const handleEnterCode = () => {
     setShowReferralCode(true);
@@ -124,7 +157,12 @@ export default function InviteFriends() {
 
       {/* Middle Section - Invite Button */}
       <button
-        onClick={handleInvite}
+        onClick={() => {
+          const inviteCode = inviteInfo?.data?.inviteCode || '';
+          if (inviteCode) {
+            handleInvite(inviteCode);
+          }
+        }}
         style={{
           display: 'flex',
           flexDirection: 'row',
@@ -263,6 +301,7 @@ export default function InviteFriends() {
 
     {/* Referral Code Modal */}
     < ReferralCode
+      referralCode={referralCode}
       isOpen={showReferralCode}
       onClose={handleReferralCodeClose}
       onConfirm={handleReferralCodeConfirm}
