@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "prebuild": "cd webf-modules/webf-point && pnpm build || true",
+    "postinstall": "cd webf-modules/webf-point && pnpm install --no-frozen-lockfile || true",
+    "prebuild": "cd webf-modules/webf-point && (test -f node_modules/.bin/tsup || pnpm install) && pnpm run build",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"

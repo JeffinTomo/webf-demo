@@ -14,11 +14,10 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "tsup",
+    "build": "pnpm exec tsup || npx tsup",
     "dev": "tsup --watch",
     "clean": "rimraf dist",
-    "prepublishOnly": "npm run build",
-    "postinstall": "npm run build"
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "webf",
