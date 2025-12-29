@@ -3,16 +3,37 @@ import ReferralCode from '../referral-code';
 import { userAPIs } from '../../api/api';
 import type { RequestType, GetUserInfoResponse, GetInviteInfoResponse } from '../../api/types';
 import { WebFPoint } from '@wlfi/webf-point';
+import MyPoints from '../my-points';
 
 export default function InviteFriends() {
-  const [friendsReferred] = useState(0);
-  const [pointsEarned] = useState(0);
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
   const [showReferralCode, setShowReferralCode] = useState(false);
   const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null>(null);
   const [inviteInfo, setInviteInfo] = useState<RequestType<GetInviteInfoResponse["data"]> | null>(null);
 
+
+
+  const [uniqueId, setUniqueId] = useState<string>('');
+  const [referralCode, setReferralCode] = useState<string>('');
+
+  const generateId = useCallback(async () => {
+    if (WebFPoint.isAvailable()) {
+      try {
+        const result = await WebFPoint.generateUniqueId();
+        const data = await userAPIs.regNewDevice({ deviceIdentity: result.id });
+        setUniqueId(result.id + '\n' + JSON.stringify(data));
+        console.log('Generate unique id result:', result);
+      } catch (err) {
+        console.error('Failed to generate unique id:', err);
+      }
+    }
+  }, []);
+
   const refreshUserData = useCallback(async () => {
+    if (!uniqueId) {
+      return;
+    }
+
     userAPIs.getUserInfo().then((res) => {
       console.log('User info:', res);
       setUserInfo(res);
@@ -22,12 +43,15 @@ export default function InviteFriends() {
       console.log('Invite info:', res);
       setInviteInfo(res);
     });
-  }, []);
+  }, [uniqueId]);
   console.log('Getting user info...', userInfo, inviteInfo);
 
+  // Generate unique ID using WebF plugin - only run once on mount
+  useEffect(() => {
+    generateId();
+  }, [generateId]);
 
-  const [referralCode, setReferralCode] = useState<string>('');
-  // Timer countdown effect
+  // Set up method channel handlers - only run once on mount
   useEffect(() => {
     // Check if webf is available (WebF environment)
     if (typeof window !== 'undefined' && window.webf?.methodChannel) {
@@ -45,12 +69,19 @@ export default function InviteFriends() {
         });
 
         methodChannel.addMethodCallHandler('refreshData', () => {
+          generateId();
           refreshUserData();
         });
       }
     }
-    refreshUserData();
-  }, [refreshUserData]);
+  }, [generateId, refreshUserData]);
+
+  // Refresh user data when uniqueId changes
+  useEffect(() => {
+    if (uniqueId) {
+      refreshUserData();
+    }
+  }, [uniqueId, refreshUserData]);
 
   // Timer countdown effect
   useEffect(() => {
@@ -107,8 +138,18 @@ export default function InviteFriends() {
     setShowReferralCode(false);
   };
 
-  const isBinded = false;
+  if (!uniqueId) {
+    return null;
+  }
+
+
   return (<>
+    <MyPoints
+      points={inviteInfo?.data?.totalPts || 0}
+    />
+    {/* <pre>1: {JSON.stringify(uniqueId, null, 2)}</pre> */}
+    {/* <pre>2: {JSON.stringify(userInfo, null, 2)}</pre> */}
+    {/* <pre>3: {JSON.stringify(inviteInfo, null, 2)}</pre> */}
     <div
       id="invite-friends"
       style={{
@@ -135,10 +176,10 @@ export default function InviteFriends() {
         {/* Left Column - Friends referred */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0px', gap: '4px', width: '127.5px', height: '55px', flexGrow: 1 }}>
           <div style={{ fontWeight: 600, fontSize: '28px', lineHeight: '120%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FFFFFF' }}>
-            {friendsReferred}
+            {userInfo?.data?.inviteWalletCount || 0}
           </div>
           <div style={{ fontWeight: 400, fontSize: '12px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#969696' }}>
-            Friends referred
+            {userInfo?.data?.ptsByReferral || 0}
           </div>
         </div>
 
@@ -148,7 +189,7 @@ export default function InviteFriends() {
         {/* Right Column - Points earned */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0px', gap: '4px', width: '127.5px', height: '55px', flexGrow: 1 }}>
           <div style={{ fontWeight: 600, fontSize: '28px', lineHeight: '120%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FFFFFF' }}>
-            {pointsEarned}
+            {inviteInfo?.data?.totalPts || 0}
           </div>
           <div style={{ fontWeight: 400, fontSize: '12px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#969696' }}>
             Points earned
@@ -194,7 +235,7 @@ export default function InviteFriends() {
       </button>
 
       {/* Invited by Section */}
-      {isBinded ? <div
+      {inviteInfo?.data?.referralWalletAvatar && inviteInfo?.data?.referralWalletName ? <div
         style={{
           fontFamily: 'Sora',
           fontStyle: 'normal',
@@ -225,9 +266,9 @@ export default function InviteFriends() {
             background: '#A9E1B1',
             borderRadius: '50%',
           }}
-        >🐶</span>
+        ><img src={inviteInfo?.data?.referralWalletAvatar} alt="referral wallet avatar" style={{ width: '20px', height: '20px' }} /></span>
         <span>
-          @wfli887
+          @{inviteInfo?.data?.referralWalletName}
         </span>
       </div> :
 

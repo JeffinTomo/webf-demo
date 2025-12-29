@@ -8,6 +8,10 @@ export interface Result {
     /** Error message if failed */
     error?: string;
 }
+export interface UniqueId {
+    /** Unique id */
+    id: string;
+}
 export interface InviteCode {
     /** Invite code */
     code: string;

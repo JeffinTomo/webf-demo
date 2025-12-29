@@ -42,6 +42,16 @@ export interface SetInviteCodeResponse {
   message?: string;
 }
 
+// Request/Response types for register new device API
+export interface RegNewDeviceResponse {
+  code: number;
+  data?: {
+    success: boolean;
+    message?: string;
+  };
+  message?: string;
+}
+
 // Request/Response types for user info API
 export interface GetUserInfoResponse {
   code: number;

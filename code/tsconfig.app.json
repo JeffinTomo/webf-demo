@@ -20,7 +20,7 @@
     /* Path mapping for local packages */
     "baseUrl": ".",
     "paths": {
-      "@wlfi/webf-point": ["./node_modules/@wlfi/webf-point/dist/index.d.ts", "./webf-modules/webf-point/dist/index.d.ts"]
+      "@wlfi/webf-point": ["./webf-modules/webf-point/dist"]
     },
 
     /* Linting */

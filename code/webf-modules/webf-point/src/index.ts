@@ -6,7 +6,7 @@
  */
 
 import { webf } from '@openwebf/webf-enterprise-typings';
-import type { InviteCode, Result } from './types';
+import type { InviteCode, Result, UniqueId } from './types';
 
 export class WebFPoint {
   static isAvailable(): boolean {
@@ -20,8 +20,15 @@ export class WebFPoint {
     return webf.invokeModuleAsync('Point', 'shareInviteCode', code);
   }
 
+  static async generateUniqueId(): Promise<UniqueId> {
+    if (!this.isAvailable()) {
+      throw new Error('WebF module "Point" is not available. Make sure it is registered via WebF.defineModule().');
+    }
+    return webf.invokeModuleAsync('Point', 'generateUniqueId');
+  }
+
 }
 
 export type {
-  InviteCode,Result
+  InviteCode,Result,UniqueId
 } from './types';

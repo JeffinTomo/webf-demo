@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { SetInviteCodeRequest, SetInviteCodeResponse, GetUserInfoResponse, RequestType, GetInviteInfoResponse } from "./types";
+import type { SetInviteCodeRequest, SetInviteCodeResponse, GetUserInfoResponse, RequestType, GetInviteInfoResponse, RegNewDeviceResponse } from "./types";
 
 const envs = {
   dev: {
@@ -15,10 +15,10 @@ const envs = {
 const env = "dev";
 export const config = envs[env] || envs.dev;
 
-export const metayReq = axios.create(config);
+export const wlfiReq = axios.create(config);
 
 // Request interceptor for adding auth token
-[metayReq].forEach((apiItem) => {
+[wlfiReq].forEach((apiItem) => {
   apiItem.interceptors.request.use(
     async (config) => {
       config.headers["Content-Type"] = "application/json";
@@ -53,10 +53,19 @@ export const metayReq = axios.create(config);
 });
 
 export const userAPIs = {
+  regNewDevice: async (params: {deviceIdentity: string}): Promise<RequestType<RegNewDeviceResponse["data"]> | null> => {
+    try {
+      const res = await wlfiReq.put(`/api/project/wlfi/reward/wallet/activity`, params);
+      return res.data;
+    } catch (err) {
+      console.error("regNewDevice failed: ", err);
+      return err as RequestType<RegNewDeviceResponse["data"]> | null;
+    }
+  },
   // Set referral code
   setInviteCode: async (params: SetInviteCodeRequest): Promise<RequestType<SetInviteCodeResponse["data"]> | null> => {
     try {
-      const res = await metayReq.put(`/api/project/wlfi/reward/wallet/invite-code`, params);
+      const res = await wlfiReq.put(`/api/project/wlfi/reward/wallet/invite-code`, params);
       return res.data;
     } catch (err) {
       console.error("setInviteCode failed: ", err);
@@ -66,7 +75,7 @@ export const userAPIs = {
 
   getInviteInfo: async (): Promise<RequestType<GetInviteInfoResponse["data"]> | null> => {
     try {
-      const res = await metayReq.get(`/api/project/wlfi/reward/wallet/info`);
+      const res = await wlfiReq.get(`/api/project/wlfi/reward/wallet/info`);
       return res.data;
     } catch (err) {
       console.error("getInviteInfo failed: ", err);
@@ -77,7 +86,7 @@ export const userAPIs = {
   // Get user info (including invite count)
   getUserInfo: async (): Promise<RequestType<GetUserInfoResponse["data"]> | null> => {
     try {
-      const res = await metayReq.get(`/api/project/wlfi/reward/wallet/referral`);
+      const res = await wlfiReq.get(`/api/project/wlfi/reward/wallet/referral`);
       return res.data;
     } catch (err) {
       console.error("getUserInfo failed: ", err);
