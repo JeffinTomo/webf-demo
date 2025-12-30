@@ -8,6 +8,7 @@ import MyPoints from '../my-points';
 const logger = (name, data: any) => {
   console.log(`[points page] ${name}: ${JSON.stringify(data)}`);
 };
+logger('version', '0.0.3');
 
 export default function InviteFriends() {
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
@@ -25,10 +26,13 @@ export default function InviteFriends() {
     if (WebFPoint.isAvailable()) {
       try {
         const result = await WebFPoint.generateUniqueId();
+        logger('generateUniqueId:', result);
+        logger('generateUniqueId:', result?.id || '');
         if (!result?.id) {
           return;
         }
-        await userAPIs.regNewDevice({ deviceIdentity: result.id });
+        const res = await userAPIs.regNewDevice({ deviceIdentity: result.id });
+        logger('regNewDevice:', res);
         setUniqueId(result?.id);
         logger('Generate unique id result:', result);
       } catch (err) {
@@ -63,6 +67,8 @@ export default function InviteFriends() {
 
       if (methodChannel) {
         methodChannel.addMethodCallHandler('receiveReferralCode', (params?: { code?: string }) => {
+          logger('receiveReferralCode', params);
+          logger('receiveReferralCode', params?.code || '');
           const code = params?.code;
           if (!code) {
             throw new Error('Code is required');
