@@ -14,6 +14,9 @@ export default function InviteFriends() {
   const [uniqueId, setUniqueId] = useState<string>('');
   const [referralCode, setReferralCode] = useState<string>('');
 
+  //auto invite
+  const [autoInvite, setAutoInvite] = useState(false);
+
   const generateId = useCallback(async () => {
     if (WebFPoint.isAvailable()) {
       try {
@@ -46,6 +49,7 @@ export default function InviteFriends() {
     });
   }, [uniqueId]);
 
+
   // Set up method channel handlers - only run once on mount
   useEffect(() => {
     // Check if webf is available (WebF environment)
@@ -67,9 +71,24 @@ export default function InviteFriends() {
           await generateId();
           refreshUserData();
         });
+
+        methodChannel.addMethodCallHandler('inviteFriends', async () => {
+          setAutoInvite(true);
+        });
       }
     }
   }, [generateId, refreshUserData]);
+
+
+  useEffect(() => {
+    const code = inviteInfo?.data?.inviteCode || '';
+    if (code && autoInvite) {
+      WebFPoint.shareInviteCode({ code }).then((res: any) => {
+        console.log('Share invite code result:', res);
+        setAutoInvite(false);
+      });
+    }
+  }, [inviteInfo, autoInvite]);
 
   // Refresh user data when uniqueId changes
   useEffect(() => {
@@ -105,8 +124,6 @@ export default function InviteFriends() {
     return () => clearInterval(interval);
   }, []);
 
-
-
   const handleInvite = async (code: string) => {
     if (!code) {
       throw new Error('Code is required');
@@ -114,7 +131,6 @@ export default function InviteFriends() {
     const res = await WebFPoint.shareInviteCode({ code });
     console.log('Share invite code result:', res);
   };
-
 
   const handleEnterCode = () => {
     setShowReferralCode(true);
