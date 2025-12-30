@@ -10,6 +10,9 @@ const logger = (name, data: any) => {
 };
 logger('version', '0.0.3');
 
+
+const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
+
 export default function InviteFriends() {
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
   const [showReferralCode, setShowReferralCode] = useState(false);
@@ -167,9 +170,11 @@ export default function InviteFriends() {
     <MyPoints
       points={inviteInfo?.data?.totalPts || 0}
     />
-    {/* <pre>1: {JSON.stringify(uniqueId, null, 2)}</pre> */}
-    {/* <pre>2: {JSON.stringify(userInfo, null, 2)}</pre> */}
-    {/* <pre>3: {JSON.stringify(inviteInfo, null, 2)}</pre> */}
+    {env === "dev" && <div>
+      <pre>1: {JSON.stringify(uniqueId, null, 2)}</pre>
+      <pre>2: {JSON.stringify(userInfo, null, 2)}</pre>
+      <pre>3: {JSON.stringify(inviteInfo, null, 2)}</pre>
+    </div>}
     <div
       id="invite-friends"
       style={{
