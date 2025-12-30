@@ -75,10 +75,9 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
         style={{
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'center',
           padding: '0px',
           gap: '4px',
-          width: '100%'
+          width: '100%',
         }}
       >
         <span style={{
@@ -95,19 +94,15 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
 
         {/* Arrow Icon */}
         <div style={{
-          width: '24px',
-          height: '24px',
+          width: '14px',
+          height: '14px',
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-          position: 'relative'
+          textAlign: 'right',
+          position: 'relative',
+          top: isOpen ? '2px' : '8px'
         }}>
           <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg" style={{
-            position: 'absolute',
-            transform: isOpen
-              ? 'matrix(0.71, 0.71, 0.71, -0.71, 0, 0)'
-              : 'rotate(-45deg)',
+            transform: isOpen ? 'matrix(0.71, 0.71, 0.71, -0.71, 0, 0)' : 'rotate(-45deg)',
             transition: 'transform 0.2s'
           }}>
             <path d="M0 0L8 0L8 8" stroke="#A9A29D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
@@ -195,13 +190,11 @@ export default function FAQ() {
             justifyContent: 'center'
           }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Question mark circle */}
-              <circle cx="12" cy="12" r="9" stroke="#FAFAF9" strokeWidth="2" fill="none" />
-              {/* Question mark top */}
-              <path d="M12 8V8C12 7 13 6 14 6C15 6 16 7 16 8C16 9 15 10 14 10" stroke="#FAFAF9" strokeWidth="2" strokeLinecap="round" fill="none" />
-              {/* Question mark dot */}
-              <circle cx="12" cy="16" r="1" fill="#FAFAF9" />
+              <path d="M19.5 3H4.5C3.67158 3 3 3.67158 3 4.5V19.5C3 20.3285 3.67158 21 4.5 21H19.5C20.3285 21 21 20.3285 21 19.5V4.5C21 3.67158 20.3285 3 19.5 3Z" stroke="#FAFAF9" strokeWidth="2" strokeLinejoin="round" />
+              <path d="M12 14.3125V12.3125C13.6568 12.3125 15 10.9693 15 9.3125C15 7.65565 13.6568 6.3125 12 6.3125C10.3432 6.3125 9 7.65565 9 9.3125" stroke="#FAFAF9" strokeWidth="2" strokeLinejoin="round" />
+              <path fillRule="evenodd" clipRule="evenodd" d="M12 18.8125C12.6904 18.8125 13.25 18.2529 13.25 17.5625C13.25 16.8722 12.6904 16.3125 12 16.3125C11.3097 16.3125 10.75 16.8722 10.75 17.5625C10.75 18.2529 11.3097 18.8125 12 18.8125Z" fill="#FAFAF9" />
             </svg>
+
           </div>
 
           <span style={{
