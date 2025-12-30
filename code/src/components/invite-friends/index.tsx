@@ -8,7 +8,7 @@ import MyPoints from '../my-points';
 const logger = (name, data: any) => {
   console.log(`[points page] ${name}: ${JSON.stringify(data)}`);
 };
-logger('version', '0.0.4');
+logger('version', '0.0.5');
 
 
 // const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
