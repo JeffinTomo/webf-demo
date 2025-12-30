@@ -7,12 +7,13 @@ const envs = {
     timeout: 20000,
   },
   prod: {
-    baseURL: "https://idc-new-wallet.tomo.services",
+    baseURL: "https://wallet-v2.tomo.inc",
     timeout: 2000,
   }
 };
 
-const env = "dev";
+const prodDomain = "wlfi-points.vercel.app";
+const env = window.location.hostname.includes(prodDomain) ? "prod" : "dev";
 export const config = envs[env] || envs.dev;
 
 export const wlfiReq = axios.create(config);
