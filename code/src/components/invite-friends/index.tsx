@@ -201,7 +201,7 @@ export default function InviteFriends() {
         {/* Left Column - Friends referred */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0px', gap: '4px', width: '127.5px', height: '55px', flexGrow: 1 }}>
           <div style={{ fontWeight: 600, fontSize: '28px', lineHeight: '120%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FFFFFF' }}>
-            {userInfo?.data?.inviteWalletCount || 0}
+            {userInfo?.data?.invitedWalletCount || 0}
           </div>
           <div style={{ fontWeight: 400, fontSize: '12px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#969696' }}>
             {userInfo?.data?.ptsByReferral || 0}
