@@ -8,7 +8,7 @@ import MyPoints from '../my-points';
 export default function InviteFriends() {
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
   const [showReferralCode, setShowReferralCode] = useState(false);
-  const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null>(null);
+  const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null | any>(null);
   const [inviteInfo, setInviteInfo] = useState<RequestType<GetInviteInfoResponse["data"]> | null>(null);
 
 
