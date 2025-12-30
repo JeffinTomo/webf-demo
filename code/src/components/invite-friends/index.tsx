@@ -262,7 +262,7 @@ export default function InviteFriends() {
       </button>
 
       {/* Invited by Section */}
-      {inviteInfo?.data?.referralWalletAvatar && inviteInfo?.data?.referralWalletName ? <div
+      {inviteInfo?.data?.referralWalletAvatar && inviteInfo?.data?.referralWalletName && <div
         style={{
           fontFamily: 'Sora',
           fontStyle: 'normal',
@@ -293,80 +293,80 @@ export default function InviteFriends() {
             background: '#A9E1B1',
             borderRadius: '50%',
           }}
-        ><img src={inviteInfo?.data?.referralWalletAvatar} alt="referral wallet avatar" style={{ width: '20px', height: '20px' }} /></span>}
+        ><img src={inviteInfo?.data?.referralWalletAvatar || ''} alt="referral wallet avatar" style={{ width: '20px', height: '20px' }} /></span>}
         <span>
           @{inviteInfo?.data?.referralWalletName ?? '...'}
         </span>
-      </div> :
+      </div>}
 
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0px', gap: '8px', width: '295px', height: '48px' }}>
-          {/* Enter referral code */}
-          <div
-            onClick={handleEnterCode}
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '0px',
-              gap: '4px',
-              width: '295px',
-              height: '20px',
-              cursor: 'pointer'
-            }}
-          >
-            <span style={{ fontWeight: 500, fontSize: '14px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FAFAF9', cursor: 'pointer' }}>
-              Enter referral code
-            </span>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 12L10 8L6 4" stroke="#A9A29D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+      {(!inviteInfo?.data?.referralWalletAvatar || !inviteInfo?.data?.referralWalletName) && <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0px', gap: '8px', width: '295px', height: '48px' }}>
+        {/* Enter referral code */}
+        <div
+          onClick={handleEnterCode}
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '0px',
+            gap: '4px',
+            width: '295px',
+            height: '20px',
+            cursor: 'pointer'
+          }}
+        >
+          <span style={{ fontWeight: 500, fontSize: '14px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FAFAF9', cursor: 'pointer' }}>
+            Enter referral code
+          </span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 12L10 8L6 4" stroke="#A9A29D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+
+        {/* Timer */}
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '8px', width: '157px', height: '20px' }}>
+          {/* Days */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '4px', height: '20px' }}>
+            <div style={{ width: '20px', height: '20px', background: '#292524', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#FAFAF9' }}>
+                {String(timer.days).padStart(2, '0')}
+              </span>
+            </div>
+            <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#A9A29D' }}>D</span>
           </div>
 
-          {/* Timer */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '8px', width: '157px', height: '20px' }}>
-            {/* Days */}
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '4px', height: '20px' }}>
-              <div style={{ width: '20px', height: '20px', background: '#292524', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#FAFAF9' }}>
-                  {String(timer.days).padStart(2, '0')}
-                </span>
-              </div>
-              <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#A9A29D' }}>D</span>
+          {/* Hours */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '4px', height: '20px' }}>
+            <div style={{ width: '20px', height: '20px', background: '#292524', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#FAFAF9' }}>
+                {String(timer.hours).padStart(2, '0')}
+              </span>
             </div>
-
-            {/* Hours */}
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '4px', height: '20px' }}>
-              <div style={{ width: '20px', height: '20px', background: '#292524', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#FAFAF9' }}>
-                  {String(timer.hours).padStart(2, '0')}
-                </span>
-              </div>
-              <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#A9A29D' }}>H</span>
-            </div>
-
-            {/* Minutes */}
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '4px', height: '20px' }}>
-              <div style={{ width: '20px', height: '20px', background: '#292524', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#FAFAF9' }}>
-                  {String(timer.minutes).padStart(2, '0')}
-                </span>
-              </div>
-              <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#A9A29D' }}>M</span>
-            </div>
-
-            {/* Seconds */}
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '4px', height: '20px' }}>
-              <div style={{ width: '20px', height: '20px', background: '#292524', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#FAFAF9' }}>
-                  {String(timer.seconds).padStart(2, '0')}
-                </span>
-              </div>
-              <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#A9A29D' }}>S</span>
-            </div>
+            <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#A9A29D' }}>H</span>
           </div>
-        </div>}
-    </div >
+
+          {/* Minutes */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '4px', height: '20px' }}>
+            <div style={{ width: '20px', height: '20px', background: '#292524', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#FAFAF9' }}>
+                {String(timer.minutes).padStart(2, '0')}
+              </span>
+            </div>
+            <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#A9A29D' }}>M</span>
+          </div>
+
+          {/* Seconds */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', padding: '0px', gap: '4px', height: '20px' }}>
+            <div style={{ width: '20px', height: '20px', background: '#292524', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#FAFAF9' }}>
+                {String(timer.seconds).padStart(2, '0')}
+              </span>
+            </div>
+            <span style={{ fontWeight: 400, fontSize: '11px', lineHeight: '140%', color: '#A9A29D' }}>S</span>
+          </div>
+        </div>
+      </div>}
+    </div>
 
     {/* Referral Code Modal */}
     <ReferralCode

@@ -19,7 +19,7 @@ export default function HomePage() {
             <DailyRequest />
             <Activities />
 
-            <div className='h-[40px]'></div>
+            <div className='h-[40px] w-[100%]'></div>
             <FAQ />
           </>
         </div>
