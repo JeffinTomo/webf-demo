@@ -202,7 +202,7 @@ export default function InviteFriends() {
         {/* Left Column - Friends referred */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0px', gap: '4px', width: '127.5px', height: '55px', flexGrow: 1 }}>
           <div style={{ fontWeight: 600, fontSize: '28px', lineHeight: '120%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FFFFFF' }}>
-            {userInfo?.data?.invitedWalletCount || 0}
+            {String(userInfo?.data?.invitedWalletCount ?? 0)}
           </div>
           <div style={{ fontWeight: 400, fontSize: '12px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#969696' }}>
             Friends referred
@@ -210,12 +210,12 @@ export default function InviteFriends() {
         </div>
 
         {/* Vertical divider */}
-        <div style={{ width: '0px', height: '43.5px', border: '1px solid rgba(255, 255, 255, 0.05)' }}></div>
+        <div style={{ width: '2px', height: '43.5px', background: 'rgba(255, 255, 255, 0.05)', flexShrink: 0 }}></div>
 
         {/* Right Column - Points earned */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0px', gap: '4px', width: '127.5px', height: '55px', flexGrow: 1 }}>
           <div style={{ fontWeight: 600, fontSize: '28px', lineHeight: '120%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FFFFFF' }}>
-            {userInfo?.data?.ptsByReferral || 0}
+            {String(userInfo?.data?.ptsByReferral ?? 0)}
           </div>
           <div style={{ fontWeight: 400, fontSize: '12px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#969696' }}>
             Points earned
@@ -276,7 +276,7 @@ export default function InviteFriends() {
           justifyContent: 'center',
           color: '#A9A29D',
           width: '100%',
-          height: '15px',
+          minHeight: '15px',
           flex: 'none',
           flexGrow: 0
         }}
@@ -286,16 +286,16 @@ export default function InviteFriends() {
           Invited by
         </span>
 
-        <span
+        {inviteInfo?.data?.referralWalletAvatar && <span
           style={{
             margin: '0 5px',
             padding: '2.72px 6.2px',
             background: '#A9E1B1',
             borderRadius: '50%',
           }}
-        ><img src={inviteInfo?.data?.referralWalletAvatar} alt="referral wallet avatar" style={{ width: '20px', height: '20px' }} /></span>
+        ><img src={inviteInfo?.data?.referralWalletAvatar} alt="referral wallet avatar" style={{ width: '20px', height: '20px' }} /></span>}
         <span>
-          @{inviteInfo?.data?.referralWalletName}
+          @{inviteInfo?.data?.referralWalletName ?? '...'}
         </span>
       </div> :
 
