@@ -129,6 +129,7 @@ export default function NewUserRequest() {
             flex: 1
           }}>
             <div style={{
+              fontFamily: 'Sora',
               fontWeight: 600,
               fontSize: '18px',
               lineHeight: '140%',
@@ -137,6 +138,7 @@ export default function NewUserRequest() {
               Get {activity.points} Points
             </div>
             <div style={{
+              fontFamily: 'Sora',
               fontWeight: 400,
               fontSize: '12px',
               lineHeight: '140%',
