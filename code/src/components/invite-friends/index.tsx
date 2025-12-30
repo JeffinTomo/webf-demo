@@ -11,8 +11,6 @@ export default function InviteFriends() {
   const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null | any>(null);
   const [inviteInfo, setInviteInfo] = useState<RequestType<GetInviteInfoResponse["data"]> | null>(null);
 
-
-
   const [uniqueId, setUniqueId] = useState<string>('');
   const [referralCode, setReferralCode] = useState<string>('');
 
@@ -46,11 +44,6 @@ export default function InviteFriends() {
   }, [uniqueId]);
   console.log('Getting user info...', userInfo, inviteInfo);
 
-  // Generate unique ID using WebF plugin - only run once on mount
-  useEffect(() => {
-    generateId();
-  }, [generateId]);
-
   // Set up method channel handlers - only run once on mount
   useEffect(() => {
     // Check if webf is available (WebF environment)
@@ -68,8 +61,8 @@ export default function InviteFriends() {
           setShowReferralCode(true);
         });
 
-        methodChannel.addMethodCallHandler('refreshData', () => {
-          generateId();
+        methodChannel.addMethodCallHandler('refreshData', async () => {
+          await generateId();
           refreshUserData();
         });
       }

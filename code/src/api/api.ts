@@ -12,9 +12,9 @@ const envs = {
   }
 };
 
-const prodDomain = "wlfi-points.vercel.app";
-const env = window.location.hostname.includes(prodDomain) ? "prod" : "dev";
+const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
 export const config = envs[env] || envs.dev;
+console.log(config);
 
 export const wlfiReq = axios.create(config);
 

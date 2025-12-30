@@ -63,6 +63,7 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
       {/* Modal */}
       <div
         style={{
+          display: isOpen ? 'block' : 'none',
           position: 'fixed',
           bottom: 0,
           left: 0,
