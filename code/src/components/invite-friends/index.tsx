@@ -18,6 +18,7 @@ export default function InviteFriends() {
 
   const [uniqueId, setUniqueId] = useState<string>('');
   const [referralCode, setReferralCode] = useState<string>('');
+  const [codeBinded, setCodeBinded] = useState(false);
 
   //auto invite
   const [autoInvite, setAutoInvite] = useState(false);
@@ -55,7 +56,7 @@ export default function InviteFriends() {
       logger('Invite info:', res);
       setInviteInfo(res);
     });
-  }, [uniqueId]);
+  }, [uniqueId, codeBinded]);
 
 
   // Set up method channel handlers - only run once on mount
@@ -155,6 +156,7 @@ export default function InviteFriends() {
 
     const res = await userAPIs.setInviteCode({ inviteCodeByReferral });
     logger('Referral code submitted successfully:', res);
+    setCodeBinded(true)
   };
 
   const handleReferralCodeClose = () => {
