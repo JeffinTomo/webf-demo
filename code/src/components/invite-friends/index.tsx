@@ -5,6 +5,10 @@ import type { RequestType, GetUserInfoResponse, GetInviteInfoResponse } from '..
 import { WebFPoint } from '@wlfi/webf-point';
 import MyPoints from '../my-points';
 
+const logger = (name, data: any) => {
+  console.log(`[points page] ${name}: ${JSON.stringify(data)}`);
+};
+
 export default function InviteFriends() {
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
   const [showReferralCode, setShowReferralCode] = useState(false);
@@ -26,7 +30,7 @@ export default function InviteFriends() {
         }
         await userAPIs.regNewDevice({ deviceIdentity: result.id });
         setUniqueId(result?.id);
-        console.log('Generate unique id result:', result);
+        logger('Generate unique id result:', result);
       } catch (err) {
         console.error('Failed to generate unique id:', err);
       }
@@ -39,12 +43,12 @@ export default function InviteFriends() {
     }
 
     userAPIs.getUserInfo().then((res) => {
-      console.log('User info:', res);
+      logger('User info:', res);
       setUserInfo(res);
     });
 
     userAPIs.getInviteInfo().then((res) => {
-      console.log('Invite info:', res);
+      logger('Invite info:', res);
       setInviteInfo(res);
     });
   }, [uniqueId]);
@@ -73,6 +77,7 @@ export default function InviteFriends() {
         });
 
         methodChannel.addMethodCallHandler('inviteFriends', async () => {
+          logger('inviteFriends', true);
           setAutoInvite(true);
         });
       }
@@ -81,10 +86,11 @@ export default function InviteFriends() {
 
 
   useEffect(() => {
+    logger('autoInvite start', inviteInfo);
     const code = inviteInfo?.data?.inviteCode || '';
     if (code && autoInvite) {
       WebFPoint.shareInviteCode({ code }).then((res: any) => {
-        console.log('Share invite code result:', res);
+        logger('Share invite code result:', res);
         setAutoInvite(false);
       });
     }
@@ -129,7 +135,7 @@ export default function InviteFriends() {
       throw new Error('Code is required');
     }
     const res = await WebFPoint.shareInviteCode({ code });
-    console.log('Share invite code result:', res);
+    logger('Share invite code result:', res);
   };
 
   const handleEnterCode = () => {
@@ -137,12 +143,12 @@ export default function InviteFriends() {
   };
 
   const handleReferralCodeConfirm = async (inviteCodeByReferral: string) => {
-    console.log('Referral code confirmed:', inviteCodeByReferral);
+    logger('Referral code confirmed:', inviteCodeByReferral);
     // Handle referral code submission
     // You can add API call here
 
     const res = await userAPIs.setInviteCode({ inviteCodeByReferral });
-    console.log('Referral code submitted successfully:', res);
+    logger('Referral code submitted successfully:', res);
   };
 
   const handleReferralCodeClose = () => {
