@@ -290,8 +290,8 @@ export default function InviteFriends() {
           style={{
             margin: '0 5px',
             padding: '2px',
-            width: '20px',
-            height: '20px',
+            width: '24px',
+            height: '24px',
             background: '#A9E1B1',
             fontSize: '0',
             borderRadius: '50%',
