@@ -42,7 +42,6 @@ export default function InviteFriends() {
       setInviteInfo(res);
     });
   }, [uniqueId]);
-  console.log('Getting user info...', userInfo, inviteInfo);
 
   // Set up method channel handlers - only run once on mount
   useEffect(() => {
