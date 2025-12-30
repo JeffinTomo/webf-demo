@@ -293,6 +293,7 @@ export default function InviteFriends() {
             width: '20px',
             height: '20px',
             background: '#A9E1B1',
+            fontSize: '0',
             borderRadius: '50%',
           }}
         ><img src={inviteInfo?.data?.referralWalletAvatar || ''} alt="referral wallet avatar" style={{ width: '20px', height: '20px', borderRadius: '50%' }} /></span>}
