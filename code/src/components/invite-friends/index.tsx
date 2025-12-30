@@ -18,8 +18,11 @@ export default function InviteFriends() {
     if (WebFPoint.isAvailable()) {
       try {
         const result = await WebFPoint.generateUniqueId();
-        const data = await userAPIs.regNewDevice({ deviceIdentity: result.id });
-        setUniqueId(result.id + '\n' + JSON.stringify(data));
+        if (!result?.id) {
+          return;
+        }
+        await userAPIs.regNewDevice({ deviceIdentity: result.id });
+        setUniqueId(result?.id);
         console.log('Generate unique id result:', result);
       } catch (err) {
         console.error('Failed to generate unique id:', err);
