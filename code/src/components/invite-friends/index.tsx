@@ -289,11 +289,13 @@ export default function InviteFriends() {
         {inviteInfo?.data?.referralWalletAvatar && <span
           style={{
             margin: '0 5px',
-            padding: '2.72px 6.2px',
+            padding: '2px',
+            width: '20px',
+            height: '20px',
             background: '#A9E1B1',
             borderRadius: '50%',
           }}
-        ><img src={inviteInfo?.data?.referralWalletAvatar || ''} alt="referral wallet avatar" style={{ width: '20px', height: '20px' }} /></span>}
+        ><img src={inviteInfo?.data?.referralWalletAvatar || ''} alt="referral wallet avatar" style={{ width: '20px', height: '20px', borderRadius: '50%' }} /></span>}
         <span>
           @{inviteInfo?.data?.referralWalletName ?? '...'}
         </span>
