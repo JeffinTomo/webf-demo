@@ -39,8 +39,6 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
     }
   };
 
-  if (!isOpen) return null;
-
   return (
     <>
       {/* Backdrop */}
@@ -48,6 +46,7 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
         id="referral-code-backdrop"
         onClick={onClose}
         style={{
+          display: isOpen ? 'block' : 'none',
           position: 'fixed',
           top: 0,
           left: 0,
