@@ -8,7 +8,7 @@ import MyPoints from '../my-points';
 const logger = (name, data: any) => {
   console.log(`[points page] ${name}: ${JSON.stringify(data)}`);
 };
-logger('version', '0.0.3');
+logger('version', '0.0.4');
 
 
 const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
@@ -170,11 +170,11 @@ export default function InviteFriends() {
     <MyPoints
       points={inviteInfo?.data?.totalPts || 0}
     />
-    {env === "dev" && <div>
+    {/* {env === "dev1" && <div>
       <pre>1: {JSON.stringify(uniqueId, null, 2)}</pre>
       <pre>2: {JSON.stringify(userInfo, null, 2)}</pre>
       <pre>3: {JSON.stringify(inviteInfo, null, 2)}</pre>
-    </div>}
+    </div>} */}
     <div
       id="invite-friends"
       style={{
@@ -214,7 +214,7 @@ export default function InviteFriends() {
         {/* Right Column - Points earned */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0px', gap: '4px', width: '127.5px', height: '55px', flexGrow: 1 }}>
           <div style={{ fontWeight: 600, fontSize: '28px', lineHeight: '120%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FFFFFF' }}>
-            {inviteInfo?.data?.totalPts || 0}
+            Friends referred
           </div>
           <div style={{ fontWeight: 400, fontSize: '12px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#969696' }}>
             Points earned

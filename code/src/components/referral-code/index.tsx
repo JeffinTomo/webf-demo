@@ -8,7 +8,7 @@ interface ReferralCodeProps {
 }
 
 export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode }: ReferralCodeProps) {
-  const [code, setCode] = useState(referralCode);
+  const [code, setCode] = useState<string>(referralCode);
 
   useEffect(() => {
     if (isOpen) {
@@ -110,7 +110,7 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
         >
           <input
             type="text"
-            value={code}
+            value={code || referralCode || ''}
             onChange={(e) => setCode(e.target.value)}
             placeholder="Enter code"
             style={{
