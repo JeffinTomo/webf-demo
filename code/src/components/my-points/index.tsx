@@ -46,7 +46,7 @@ export default function MyPoints({ points }: MyPointsProps) {
         }}
       >
         {/* Icon: Badge with hexagon and star */}
-        <div style={{ width: '36px', height: '36px', position: 'relative', flexShrink: 0, top: '-1px' }}>
+        <div style={{ width: '34px', height: '34px', position: 'relative', flexShrink: 0, top: '-1px' }}>
           <img
             src={starIcon}
             alt="Star icon"
@@ -57,6 +57,7 @@ export default function MyPoints({ points }: MyPointsProps) {
         {/* Points number */}
         <div
           style={{
+            fontFamily: 'Sora',
             height: '55px',
             fontWeight: 600,
             fontSize: '46px',
