@@ -10,6 +10,15 @@ interface ReferralCodeProps {
 export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode }: ReferralCodeProps) {
   const [code, setCode] = useState<string>(referralCode);
 
+  // Sync referralCode prop to local state when modal opens or referralCode changes
+  useEffect(() => {
+    // Update code when modal opens with a referralCode, or when referralCode prop changes
+    if (referralCode) {
+      setCode(referralCode);
+    }
+
+  }, [isOpen, referralCode]); // Only sync when modal opens or referralCode changes
+
   useEffect(() => {
     if (isOpen) {
       // Prevent body scroll when modal is open
@@ -110,7 +119,7 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
         >
           <input
             type="text"
-            value={code || referralCode || ''}
+            value={code}
             onChange={(e) => setCode(e.target.value)}
             placeholder="Enter code"
             style={{

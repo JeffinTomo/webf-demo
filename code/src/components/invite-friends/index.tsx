@@ -11,7 +11,7 @@ const logger = (name, data: any) => {
 logger('version', '0.0.4');
 
 
-const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
+// const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
 
 export default function InviteFriends() {
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
@@ -159,7 +159,8 @@ export default function InviteFriends() {
 
     const res = await userAPIs.setInviteCode({ inviteCodeByReferral });
     logger('Referral code submitted successfully:', res);
-    setCodeBinded(true)
+    setCodeBinded(true);
+    setShowReferralCode(false);
   };
 
   const handleReferralCodeClose = () => {
@@ -368,7 +369,7 @@ export default function InviteFriends() {
     </div >
 
     {/* Referral Code Modal */}
-    < ReferralCode
+    <ReferralCode
       referralCode={referralCode}
       isOpen={showReferralCode}
       onClose={handleReferralCodeClose}
