@@ -138,11 +138,6 @@ export default function InviteFriends() {
     setShowReferralCode(false);
   };
 
-  if (!uniqueId) {
-    return null;
-  }
-
-
   return (<>
     <MyPoints
       points={inviteInfo?.data?.totalPts || 0}
@@ -199,6 +194,7 @@ export default function InviteFriends() {
 
       {/* Middle Section - Invite Button */}
       <button
+        disabled={!inviteInfo?.data?.inviteCode}
         onClick={() => {
           const inviteCode = inviteInfo?.data?.inviteCode || '';
           if (inviteCode) {
@@ -229,7 +225,7 @@ export default function InviteFriends() {
           <path d="M9.16683 0.833008L16.6668 8.33301L9.16683 15.4163V10.833C3.3335 10.833 0.833496 17.083 0.833496 17.083C0.833496 9.99967 2.91683 5.41634 9.16683 5.41634V0.833008Z" fill="#171412" stroke="#171412" strokeWidth="1.66667" strokeLinejoin="round" />
         </svg>
 
-        <span style={{ fontWeight: 600, fontSize: '16px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#171412' }}>
+        <span style={{ fontWeight: 600, fontSize: '16px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#171412', cursor: 'pointer' }}>
           Invite friends
         </span>
       </button>
@@ -288,7 +284,7 @@ export default function InviteFriends() {
               cursor: 'pointer'
             }}
           >
-            <span style={{ fontWeight: 500, fontSize: '14px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FAFAF9' }}>
+            <span style={{ fontWeight: 500, fontSize: '14px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FAFAF9', cursor: 'pointer' }}>
               Enter referral code
             </span>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

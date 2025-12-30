@@ -173,7 +173,7 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
               fontWeight: 600,
               fontSize: '16px',
               lineHeight: '140%',
-              color: '#000000'
+              color: '#000000', cursor: 'pointer'
             }}
           >
             Confirm
