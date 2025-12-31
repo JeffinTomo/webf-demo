@@ -4,47 +4,44 @@ import { userAPIs } from '../../api/api';
 import type { RequestType, GetUserInfoResponse, GetInviteInfoResponse } from '../../api/types';
 import { WebFPoint } from '@wlfi/webf-point';
 import MyPoints from '../my-points';
-import { logger } from '../../utils/utils';
+import { logger, parseQueryString } from '../../utils/utils';
 
-logger('version', '0.0.5');
+logger('version', '0.0.6');
 
 
 // const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
 
 export default function InviteFriends() {
+  const appParams = parseQueryString() as { env: string, action: 'share' | 'referral', code?: string };
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
-  const [showReferralCode, setShowReferralCode] = useState(false);
+  const [showReferralCode, setShowReferralCode] = useState(!!appParams?.code);
   const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null | any>(null);
   const [inviteInfo, setInviteInfo] = useState<RequestType<GetInviteInfoResponse["data"]> | null>(null);
 
-  const [uniqueId, setUniqueId] = useState<string>('');
-  const [referralCode, setReferralCode] = useState<string>('');
+  const [deviceId, setDeviceId] = useState<string>('');
   const [codeBinded, setCodeBinded] = useState(false);
 
-  //auto invite
-  const [autoInvite, setAutoInvite] = useState(false);
-
-  const generateId = useCallback(async () => {
-    if (WebFPoint.isAvailable()) {
-      try {
-        const result = await WebFPoint.generateUniqueId();
-        logger('generateUniqueId:', result);
-        logger('generateUniqueId:', result?.id || '');
-        if (!result?.id) {
-          return;
-        }
-        const res = await userAPIs.regNewDevice({ deviceIdentity: result.id });
-        logger('regNewDevice:', res);
-        setUniqueId(result?.id);
-        logger('Generate unique id result:', result);
-      } catch (err) {
-        console.error('Failed to generate unique id:', err);
+  const regNewDevice = useCallback(async () => {
+    if (!WebFPoint.isAvailable()) {
+      return;
+    }
+    try {
+      const result = await WebFPoint.generateUniqueId();
+      logger('generateUniqueId:', result);
+      logger('generateUniqueId:', result?.id || '');
+      if (!result?.id) {
+        return;
       }
+      const res = await userAPIs.regNewDevice({ deviceIdentity: result.id });
+      logger('regNewDevice:', res);
+      setDeviceId(result?.id);
+    } catch (err) {
+      console.error('Failed to generate unique id:', err);
     }
   }, []);
 
   const refreshUserData = useCallback(async () => {
-    if (!uniqueId) {
+    if (!deviceId) {
       return;
     }
 
@@ -57,59 +54,32 @@ export default function InviteFriends() {
       logger('Invite info:', res);
       setInviteInfo(res);
     });
-  }, [uniqueId, codeBinded]);
+  }, [deviceId]);
 
 
   // Set up method channel handlers - only run once on mount
   useEffect(() => {
-    // Check if webf is available (WebF environment)
-    if (typeof window !== 'undefined' && window.webf?.methodChannel) {
-      const webf = window.webf;
-      const methodChannel = webf.methodChannel;
+    (async () => {
+      await regNewDevice();
+      await refreshUserData();
+    })();
+  }, [regNewDevice, refreshUserData]);
 
-      if (methodChannel) {
-        methodChannel.addMethodCallHandler('receiveReferralCode', (params?: { code?: string }) => {
-          logger('receiveReferralCode', params);
-          logger('receiveReferralCode', params?.code || '');
-          const code = params?.code;
-          if (!code) {
-            throw new Error('Code is required');
-          }
-          setReferralCode(code);
-          setShowReferralCode(true);
-        });
-
-        methodChannel.addMethodCallHandler('refreshData', async () => {
-          await generateId();
-          refreshUserData();
-        });
-
-        methodChannel.addMethodCallHandler('inviteFriends', async () => {
-          logger('inviteFriends', true);
-          setAutoInvite(true);
-        });
-      }
-    }
-  }, [generateId, refreshUserData]);
+  // Refresh user data when uniqueId changes
+  useEffect(() => {
+    refreshUserData();
+  }, [deviceId, codeBinded, refreshUserData]);
 
 
   useEffect(() => {
     logger('autoInvite start', inviteInfo);
     const code = inviteInfo?.data?.inviteCode || '';
-    if (code && autoInvite) {
+    if (code && appParams?.action === 'share') {
       WebFPoint.shareInviteCode({ code }).then((res: any) => {
         logger('Share invite code result:', res);
-        setAutoInvite(false);
       });
     }
-  }, [inviteInfo, autoInvite]);
-
-  // Refresh user data when uniqueId changes
-  useEffect(() => {
-    if (uniqueId) {
-      refreshUserData();
-    }
-  }, [uniqueId, refreshUserData]);
+  }, [inviteInfo, appParams?.action]);
 
   // Timer countdown effect
   useEffect(() => {
@@ -138,12 +108,15 @@ export default function InviteFriends() {
     return () => clearInterval(interval);
   }, []);
 
+  const [isInviting, setIsInviting] = useState(false);
   const handleInvite = async (code: string) => {
     if (!code) {
       throw new Error('Code is required');
     }
+    setIsInviting(true);
     const res = await WebFPoint.shareInviteCode({ code });
     logger('Share invite code result:', res);
+    setIsInviting(false);
   };
 
   const handleEnterCode = () => {
@@ -178,7 +151,7 @@ export default function InviteFriends() {
       id="invite-friends"
       style={{
         width: 'calc(100% - 40px)',
-        height: '233px',
+        minHeight: '220px',
         display: 'flex',
         boxSizing: 'border-box',
         flexDirection: 'column',
@@ -223,7 +196,8 @@ export default function InviteFriends() {
 
       {/* Middle Section - Invite Button */}
       <button
-        disabled={!inviteInfo?.data?.inviteCode}
+        id="invite-friends-button"
+        disabled={!inviteInfo?.data?.inviteCode || isInviting}
         onClick={() => {
           const inviteCode = inviteInfo?.data?.inviteCode || '';
           if (inviteCode) {
@@ -239,6 +213,7 @@ export default function InviteFriends() {
           gap: '8px',
           width: '100%',
           height: '50px',
+          opacity: isInviting ? 0.6 : 1,
           background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #FAC515 0%, #EAAC08 100%)',
           border: '1px solid #FAC515',
           boxShadow: 'inset 0px -2px 0px rgba(0, 0, 0, 0.4), inset 0px 2px 0px rgba(255, 255, 255, 0.4)',
@@ -300,7 +275,10 @@ export default function InviteFriends() {
         </span>
       </div>}
 
-      {(!inviteInfo?.data?.referralWalletAvatar || !inviteInfo?.data?.referralWalletName) && <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0px', gap: '8px', width: '295px', height: '48px' }}>
+      {(!inviteInfo?.data?.referralWalletAvatar || !inviteInfo?.data?.referralWalletName) && <div style={{
+        display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0px', gap: '8px', width: '295px', height: '48px',
+        visibility: (!WebFPoint.isAvailable() || inviteInfo?.data) ? 'visible' : 'hidden'
+      }}>
         {/* Enter referral code */}
         <div
           onClick={handleEnterCode}
@@ -371,7 +349,7 @@ export default function InviteFriends() {
 
     {/* Referral Code Modal */}
     <ReferralCode
-      referralCode={referralCode}
+      referralCode={appParams?.code || ''}
       isOpen={showReferralCode}
       onClose={handleReferralCodeClose}
       onConfirm={handleReferralCodeConfirm}
