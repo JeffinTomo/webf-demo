@@ -4,10 +4,8 @@ import { userAPIs } from '../../api/api';
 import type { RequestType, GetUserInfoResponse, GetInviteInfoResponse } from '../../api/types';
 import { WebFPoint } from '@wlfi/webf-point';
 import MyPoints from '../my-points';
+import { logger } from '../../utils/utils';
 
-const logger = (name, data: any) => {
-  console.log(`[points page] ${name}: ${JSON.stringify(data)}`);
-};
 logger('version', '0.0.5');
 
 
