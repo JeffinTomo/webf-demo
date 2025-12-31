@@ -13,7 +13,6 @@ logger('version', '0.0.6');
 
 export default function InviteFriends() {
   const appParams = parseQueryString() as { env: string, action: 'share' | 'referral' | '', code?: string };
-  console.log('appParams', appParams);
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
   const [showReferralCode, setShowReferralCode] = useState(!!appParams?.code);
   const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null | any>(null);
@@ -23,6 +22,7 @@ export default function InviteFriends() {
   const [codeBinded, setCodeBinded] = useState(false);
 
   const regNewDevice = useCallback(async () => {
+    logger('appParams', appParams);
     if (!WebFPoint.isAvailable()) {
       return;
     }
