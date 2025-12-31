@@ -239,7 +239,7 @@ export default function InviteFriends() {
           gap: '8px',
           width: '100%',
           height: '50px',
-          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 100%), #EAAC08',
+          background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #FAC515 0%, #EAAC08 100%)',
           border: '1px solid #FAC515',
           boxShadow: 'inset 0px -2px 0px rgba(0, 0, 0, 0.4), inset 0px 2px 0px rgba(255, 255, 255, 0.4)',
           borderRadius: '12px',
