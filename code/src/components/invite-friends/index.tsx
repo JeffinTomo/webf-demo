@@ -277,8 +277,7 @@ export default function InviteFriends() {
       </div>}
 
       {(!inviteInfo?.data?.referralWalletAvatar || !inviteInfo?.data?.referralWalletName) && <div style={{
-        display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0px', gap: '8px', width: '295px', height: '48px',
-        visibility: (!WebFPoint.isAvailable() || inviteInfo?.data) ? 'visible' : 'hidden'
+        display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '0px', gap: '8px', width: '295px', height: '48px'
       }}>
         {/* Enter referral code */}
         <div
