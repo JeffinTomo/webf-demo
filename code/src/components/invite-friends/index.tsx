@@ -12,7 +12,8 @@ logger('version', '0.0.6');
 // const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
 
 export default function InviteFriends() {
-  const appParams = parseQueryString() as { env: string, action: 'share' | 'referral', code?: string };
+  const appParams = parseQueryString() as { env: string, action: 'share' | 'referral' | '', code?: string };
+  console.log('appParams', appParams);
   const [timer, setTimer] = useState({ days: 6, hours: 23, minutes: 36, seconds: 51 });
   const [showReferralCode, setShowReferralCode] = useState(!!appParams?.code);
   const [userInfo, setUserInfo] = useState<RequestType<GetUserInfoResponse["data"]> | null | any>(null);
@@ -72,7 +73,7 @@ export default function InviteFriends() {
 
 
   useEffect(() => {
-    logger('autoInvite start', inviteInfo);
+    logger('autoInvite start', { inviteInfo, action: appParams?.action });
     const code = inviteInfo?.data?.inviteCode || '';
     if (code && appParams?.action === 'share') {
       WebFPoint.shareInviteCode({ code }).then((res: any) => {
