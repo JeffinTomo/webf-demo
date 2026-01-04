@@ -6,7 +6,7 @@ import { WebFPoint } from '@wlfi/webf-point';
 import MyPoints from '../my-points';
 import { logger, parseQueryString } from '../../utils/utils';
 
-logger('version', '0.0.6');
+logger('version', '0.0.7');
 
 
 // const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
@@ -295,7 +295,7 @@ export default function InviteFriends() {
           }}
         >
           <span style={{ fontWeight: 500, fontSize: '14px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FAFAF9', cursor: 'pointer' }}>
-            Enter referral code here
+            Enter referral code
           </span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 12L10 8L6 4" stroke="#A9A29D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
