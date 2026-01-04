@@ -1,10 +1,19 @@
 import axios from "axios";
 import type { SetInviteCodeRequest, SetInviteCodeResponse, GetUserInfoResponse, RequestType, GetInviteInfoResponse, RegNewDeviceResponse } from "./types";
 
+const domains = {
+  "wlfi-points.vercel.app": "dev",
+  "wlfi-point-test.tomo.services": "test",
+  "wlfi-point-prod.tomo.services": "prod",
+};
 const envs = {
   dev: {
     baseURL: "https://idc-new-wallet.tomo.services",
     timeout: 20000,
+  },
+  test: {
+    baseURL: "https://idc-new-wallet.tomo.services",
+    timeout: 2000,
   },
   prod: {
     baseURL: "https://wallet-v2.tomo.inc",
@@ -12,8 +21,9 @@ const envs = {
   }
 };
 
-const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
-export const config = envs[env] || envs.dev;
+const _host = window.location.host;
+const currentEnv = domains[_host] || "dev";
+export const config = envs[currentEnv];
 console.log(config);
 
 export const wlfiReq = axios.create(config);
