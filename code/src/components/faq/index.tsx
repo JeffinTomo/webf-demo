@@ -134,7 +134,7 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
 }
 
 export default function FAQ() {
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set(['1'])); // 第一个默认展开
+  const [openItems, setOpenItems] = useState<Set<string>>(new Set(['-1'])); // 第一个默认展开
 
   const toggleItem = (id: string) => {
     setOpenItems(prev => {

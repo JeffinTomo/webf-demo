@@ -116,7 +116,7 @@ export default function DailyRequest() {
       {/* Card 2: Keep $1000+ in Savings - In Progress */}
       <ActivityCard
         icon="savings"
-        title="Keep $1000+ in Savings"
+        title="Keep $1,000+ in Savings"
         subtitle=""
         progress={{ current: 12, total: 340 }}
         status="active"
@@ -126,7 +126,7 @@ export default function DailyRequest() {
       {/* Card 3: Keep $1000+ balance - In Progress */}
       <ActivityCard
         icon="balance"
-        title="Keep $1000+ balance"
+        title="Keep $1,000+ balance"
         subtitle=""
         progress={{ current: 212, total: 340 }}
         status="active"
@@ -236,7 +236,7 @@ function ActivityCard({ icon, title, progress, status, onClick }: ActivityCardPr
                     left: '0',
                     width: `${progressPercent}%`,
                     height: '100%',
-                    background: 'linear-gradient(90deg, #E7AC08 0%, #FFD664 100%)',
+                    background: 'linear-gradient(90deg, #FFD664 0%, #E7AC08 100%)',
                     borderRadius: '8px'
                   }} />
                 )}

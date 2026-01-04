@@ -3,8 +3,8 @@ import type { SetInviteCodeRequest, SetInviteCodeResponse, GetUserInfoResponse, 
 
 const domains = {
   "wlfi-points.vercel.app": "dev",
-  "wlfi-point-test.tomo.services": "test",
-  "wlfi-point-prod.tomo.services": "prod",
+  "wlfi-point-test.tomo.inc": "test",
+  "wlfi-point-prod.tomo.inc": "prod",
 };
 const envs = {
   dev: {
