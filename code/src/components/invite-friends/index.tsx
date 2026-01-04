@@ -129,8 +129,15 @@ export default function InviteFriends() {
     // Handle referral code submission
     // You can add API call here
 
-    const res = await userAPIs.setInviteCode({ inviteCodeByReferral });
+    const res: any = await userAPIs.setInviteCode({ inviteCodeByReferral });
     logger('Referral code submitted successfully:', res);
+
+    if (res?.code !== 0) {
+      await WebFPoint.showErrorToast({ message: res?.msg || 'Error: please check your referral code.' });
+      return;
+    }
+
+    await WebFPoint.showSuccessToast({ message: res?.msg || 'Bind successful.' });
     setCodeBinded(true);
     setShowReferralCode(false);
   };

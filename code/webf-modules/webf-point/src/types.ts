@@ -16,5 +16,15 @@ export interface InviteCode {
     /** Invite code */
     code: string;
 }
+export interface ToastMessage {
+    /** Toast message content */
+    message: string;
+}
+export /** Points page navigation target */
+type PointNavigationTarget = 'cryptoList' | 'earn' | 'addMoney';
+export interface NavigationParams {
+    /** Target page to navigate to */
+    target: PointNavigationTarget;
+}
 
 export {};

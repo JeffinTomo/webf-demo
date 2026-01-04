@@ -44,7 +44,6 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
   const handleConfirm = () => {
     if (code.trim()) {
       onConfirm(code.trim());
-      onClose();
     }
   };
 
@@ -135,6 +134,7 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
             }}
           />
           <button
+            disabled={code.trim() === ''}
             onClick={handlePaste}
             style={{
               padding: '4px 12px',
