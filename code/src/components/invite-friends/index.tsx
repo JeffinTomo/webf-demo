@@ -295,7 +295,7 @@ export default function InviteFriends() {
           }}
         >
           <span style={{ fontWeight: 500, fontSize: '14px', lineHeight: '140%', display: 'flex', alignItems: 'center', textAlign: 'center', color: '#FAFAF9', cursor: 'pointer' }}>
-            Enter referral code
+            Enter referral code here
           </span>
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M6 12L10 8L6 4" stroke="#A9A29D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
