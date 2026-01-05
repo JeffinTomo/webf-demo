@@ -21,7 +21,7 @@ const envs = {
   }
 };
 
-const _host = window.location.host;
+const _host = (window.location.host || '')?.split(':')?.[0] || '';
 const currentEnv = domains[_host] || "dev";
 export const config = envs[currentEnv];
 console.log("window.location", config, _host);

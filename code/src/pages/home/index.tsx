@@ -19,7 +19,7 @@ export default function HomePage() {
             <DailyRequest />
             <Activities />
 
-            <div className='h-[40px] w-[100%]'></div>
+            <div style={{ height: '20px', width: '100%' }}>&nbsp;</div>
             <FAQ />
           </>
         </div>

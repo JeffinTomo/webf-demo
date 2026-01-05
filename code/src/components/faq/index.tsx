@@ -99,10 +99,10 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
           display: 'flex',
           textAlign: 'right',
           position: 'relative',
-          top: isOpen ? '2px' : '8px'
+          top: !isOpen ? '2px' : '8px'
         }}>
           <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg" style={{
-            transform: isOpen ? 'matrix(0.71, 0.71, 0.71, -0.71, 0, 0)' : 'rotate(-45deg)',
+            transform: !isOpen ? 'matrix(0.71, 0.71, 0.71, -0.71, 0, 0)' : 'rotate(-45deg)',
             transition: 'transform 0.2s'
           }}>
             <path d="M0 0L8 0L8 8" stroke="#A9A29D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
@@ -134,7 +134,9 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
 }
 
 export default function FAQ() {
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set(['-1'])); // 第一个默认展开
+  const [openItems, setOpenItems] = useState<Set<string>>(new Set(['9999'])); // 第一个默认展开
+
+  console.log('openItems', openItems);
 
   const toggleItem = (id: string) => {
     setOpenItems(prev => {

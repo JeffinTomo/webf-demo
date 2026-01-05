@@ -112,21 +112,21 @@ export default function DailyRequest() {
         <ActivityCard
           title="Trade crypto"
           progress={{ current: 66, total: 340 }}
-          description="Earn up to xxx points daily by trading crypto."
+          description="Earn up to 340 points daily by trading crypto."
           onClick={() => WebFPoint?.navigateTo({ target: 'cryptoList' })}
         />
 
         <ActivityCard
           title="Keep $1,000+ in Earn"
           progress={{ current: 86, total: 340 }}
-          description="Earn up to xxx points daily by maintaining a total deposit of $1,000 or more in Earn."
+          description="Earn up to 340 points daily by maintaining a total deposit of $1,000 or more in Earn."
           onClick={() => WebFPoint?.navigateTo({ target: 'earn' })}
         />
 
         <ActivityCard
           title="Keep $1,000+ in WLFI balance"
           progress={{ current: 203, total: 340 }}
-          description="Earn up to xxx points daily by maintaining a WLFI balance of $1,000 or more."
+          description="Earn up to 340 points daily by maintaining a WLFI balance of $1,000 or more."
           onClick={() => WebFPoint?.navigateTo({ target: 'addMoney' })}
         />
       </div>
@@ -229,7 +229,7 @@ function ActivityCard({ title, progress, description, onClick }: ActivityCardPro
               <span style={{
                 fontFamily: 'Sora',
                 fontWeight: 400,
-                fontSize: '10px',
+                fontSize: '12px',
                 lineHeight: '140%',
                 color: '#FAFAF9',
                 whiteSpace: 'nowrap'
@@ -239,7 +239,7 @@ function ActivityCard({ title, progress, description, onClick }: ActivityCardPro
               <span style={{
                 fontFamily: 'Sora',
                 fontWeight: 400,
-                fontSize: '10px',
+                fontSize: '12px',
                 lineHeight: '140%',
                 color: '#FAFAF9',
                 textAlign: 'right',
@@ -253,7 +253,7 @@ function ActivityCard({ title, progress, description, onClick }: ActivityCardPro
             <div style={{
               fontFamily: 'Sora',
               fontWeight: 400,
-              fontSize: '10px',
+              fontSize: '12px',
               lineHeight: '140%',
               color: '#79716B',
               width: '100%'
