@@ -6,8 +6,6 @@ import { WebFPoint } from '@wlfi/webf-point';
 import MyPoints from '../my-points';
 import { logger, parseQueryString } from '../../utils/utils';
 
-logger('version', '0.0.7');
-
 
 // const env = window.location.href.indexOf('?env=prod') > -1 ? "prod" : "dev";
 
