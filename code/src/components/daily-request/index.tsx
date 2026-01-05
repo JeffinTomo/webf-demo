@@ -111,21 +111,21 @@ export default function DailyRequest() {
       }}>
         <ActivityCard
           title="Trade crypto"
-          progress={{ current: 66, total: 303 }}
+          progress={{ current: 66, total: 340 }}
           description="Earn up to xxx points daily by trading crypto."
           onClick={() => WebFPoint?.navigateTo({ target: 'cryptoList' })}
         />
 
         <ActivityCard
           title="Keep $1,000+ in Earn"
-          progress={{ current: 66, total: 303 }}
+          progress={{ current: 86, total: 340 }}
           description="Earn up to xxx points daily by maintaining a total deposit of $1,000 or more in Earn."
           onClick={() => WebFPoint?.navigateTo({ target: 'earn' })}
         />
 
         <ActivityCard
           title="Keep $1,000+ in WLFI balance"
-          progress={{ current: 203, total: 303 }}
+          progress={{ current: 203, total: 340 }}
           description="Earn up to xxx points daily by maintaining a WLFI balance of $1,000 or more."
           onClick={() => WebFPoint?.navigateTo({ target: 'addMoney' })}
         />
@@ -234,7 +234,7 @@ function ActivityCard({ title, progress, description, onClick }: ActivityCardPro
                 color: '#FAFAF9',
                 whiteSpace: 'nowrap'
               }}>
-                xxx Earned
+                {progress.current} Earned
               </span>
               <span style={{
                 fontFamily: 'Sora',
@@ -245,7 +245,7 @@ function ActivityCard({ title, progress, description, onClick }: ActivityCardPro
                 textAlign: 'right',
                 whiteSpace: 'nowrap'
               }}>
-                xxx To Go
+                {progress.total - progress.current} To Go
               </span>
             </div>
 

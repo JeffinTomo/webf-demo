@@ -24,7 +24,7 @@ const envs = {
 const _host = window.location.host;
 const currentEnv = domains[_host] || "dev";
 export const config = envs[currentEnv];
-console.log(config);
+console.log("window.location", config, _host);
 
 export const wlfiReq = axios.create(config);
 
