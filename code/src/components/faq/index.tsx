@@ -32,11 +32,11 @@ const faqData: FAQItem[] = [
     question: 'How do I earn rewards by inviting friends?',
     answer: 'Click "Invite Friend" to share your invitation code. (Your friends must enter the code within 7 days of joining the program.) Once they do, you\'ll automatically earn 25% of their points as a reward whenever they earn points.'
   },
-  {
-    id: '6',
-    question: 'What do the numbers (e.g., 340/340) in daily quests mean?',
-    answer: 'The format is: [Points Earned] / [Daily Limit]\n\nExamples:\n• 0 / 340: You can continue earning points until you reach the daily limit.\n• 340 / 340: Daily limit reached.'
-  },
+  // {
+  //   id: '6',
+  //   question: 'What do the numbers (e.g., 340/340) in daily quests mean?',
+  //   answer: 'The format is: [Points Earned] / [Daily Limit]\n\nExamples:\n• 0 / 340: You can continue earning points until you reach the daily limit.\n• 340 / 340: Daily limit reached.'
+  // },
   {
     id: '7',
     question: 'Are WLFI points backed by or linked to any monetary value or exchange rate?',
