@@ -113,9 +113,19 @@ export default function InviteFriends() {
       throw new Error('Code is required');
     }
     setIsInviting(true);
-    const res = await WebFPoint.shareInviteCode({ code });
-    logger('Share invite code result:', res);
-    setIsInviting(false);
+    try {
+      const res = await WebFPoint.shareInviteCode({ code });
+      logger('Share invite code result:', res);
+      setIsInviting(false);
+      setTimeout(() => {
+        setIsInviting(false);
+      }, 100);
+    } catch (err) {
+      console.error('Failed to share invite code:', err);
+      setIsInviting(false);
+    } finally {
+      setIsInviting(false);
+    }
   };
 
   const handleEnterCode = () => {
