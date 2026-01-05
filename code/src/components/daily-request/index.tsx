@@ -1,3 +1,4 @@
+import { WebFPoint } from '@wlfi/webf-point';
 import { useEffect, useState } from 'react';
 
 export default function DailyRequest() {
@@ -110,7 +111,7 @@ export default function DailyRequest() {
         subtitle=""
         progress={{ current: 340, total: 340 }}
         status="completed"
-        onClick={() => handleActivityClick('purchase')}
+        onClick={() => WebFPoint?.navigateTo({ target: 'cryptoList' })}
       />
 
       {/* Card 2: Keep $1000+ in Savings - In Progress */}
@@ -120,7 +121,7 @@ export default function DailyRequest() {
         subtitle=""
         progress={{ current: 12, total: 340 }}
         status="active"
-        onClick={() => handleActivityClick('savings')}
+        onClick={() => WebFPoint?.navigateTo({ target: 'earn' })}
       />
 
       {/* Card 3: Keep $1000+ balance - In Progress */}
@@ -130,7 +131,7 @@ export default function DailyRequest() {
         subtitle=""
         progress={{ current: 212, total: 340 }}
         status="active"
-        onClick={() => handleActivityClick('balance')}
+        onClick={() => WebFPoint?.navigateTo({ target: 'addMoney' })}
       />
     </div>
   );
@@ -165,7 +166,8 @@ function ActivityCard({ icon, title, progress, status, onClick }: ActivityCardPr
         width: '100%',
         height: '74px',
         background: '#201D1B',
-        borderRadius: '12px'
+        borderRadius: '12px',
+        cursor: 'pointer'
       }}
     >
       <div style={{

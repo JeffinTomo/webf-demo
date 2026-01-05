@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import type { ActivityItem } from '../../api/types';
 import star2Icon from '../../assets/star2.png';
+import { WebFPoint } from '@wlfi/webf-point';
 
 export default function NewUserRequest() {
   const activity = {
@@ -19,7 +20,7 @@ export default function NewUserRequest() {
   const handleActivityClick = (activity: ActivityItem) => {
     // Handle activity action
     console.log('Activity clicked:', activity);
-    // In a real app, this would trigger the activity completion flow
+    WebFPoint?.navigateTo({ target: 'cryptoList' });
   };
 
   return (
@@ -85,6 +86,7 @@ export default function NewUserRequest() {
           marginTop: '20px',
           width: '100%',
           height: '101px',
+          cursor: 'pointer',
           background: 'linear-gradient(180deg, #421E06 0%, #713C12 100%)',
           borderRadius: '12px',
           position: 'relative',
