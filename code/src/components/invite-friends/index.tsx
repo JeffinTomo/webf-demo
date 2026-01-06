@@ -20,7 +20,6 @@ export default function InviteFriends() {
   const [codeBinded, setCodeBinded] = useState(false);
 
   const regNewDevice = useCallback(async () => {
-    logger('appParams', appParams);
     if (!WebFPoint.isAvailable()) {
       return;
     }
@@ -62,7 +61,7 @@ export default function InviteFriends() {
       await regNewDevice();
       await refreshUserData();
     })();
-  }, [regNewDevice, refreshUserData]);
+  }, []);
 
   // Refresh user data when uniqueId changes
   useEffect(() => {
@@ -110,20 +109,16 @@ export default function InviteFriends() {
   const [isInviting, setIsInviting] = useState(false);
   const handleInvite = async (code: string) => {
     if (!code) {
-      throw new Error('Code is required');
+      WebFPoint.showErrorToast({ message: 'Error: code is required.' });
+      return;
     }
     setIsInviting(true);
     try {
-      const res = await WebFPoint.shareInviteCode({ code });
-      logger('Share invite code result:', res);
+      WebFPoint.shareInviteCode({ code });
+      logger('Share invite code:', true);
       setIsInviting(false);
-      setTimeout(() => {
-        setIsInviting(false);
-      }, 100);
     } catch (err) {
       console.error('Failed to share invite code:', err);
-      setIsInviting(false);
-    } finally {
       setIsInviting(false);
     }
   };
@@ -216,9 +211,7 @@ export default function InviteFriends() {
         disabled={!inviteInfo?.data?.inviteCode || isInviting}
         onClick={() => {
           const inviteCode = inviteInfo?.data?.inviteCode || '';
-          if (inviteCode) {
-            handleInvite(inviteCode);
-          }
+          handleInvite(inviteCode);
         }}
         style={{
           display: 'flex',
