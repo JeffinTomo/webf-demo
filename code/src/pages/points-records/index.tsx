@@ -65,7 +65,6 @@ export default function PointsRecordsPage() {
       <WebFListView
         onRefresh={handleRefresh}
         onLoadmore={handleLoadMore}
-        refresh-style="customCupertino"
         style={{
           flex: 1,
           width: '100%',

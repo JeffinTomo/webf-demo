@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import bgImg from './bg.png';
 
 interface ReferralCodeProps {
   referralCode: string;
@@ -60,9 +61,10 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
+          background: `url(${bgImg}) no-repeat center center`,
+          backgroundSize: 'cover',
+          // backdropFilter: 'blur(10px)',
+          // WebkitBackdropFilter: 'blur(10px)',
           zIndex: 9998,
           animation: 'fadeIn 0.3s ease-out'
         }}
