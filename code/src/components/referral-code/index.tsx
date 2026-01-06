@@ -167,12 +167,12 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
             gap: '8px',
             width: '100%',
             height: '48px',
+            marginBottom: '16px',
             background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, #FAC515 0%, #EAAC08 100%)',
             border: '1px solid #FAC515',
+            boxShadow: 'inset 0px -2px 0px rgba(0, 0, 0, 0.4), inset 0px 2px 0px rgba(255, 255, 255, 0.4)',
             borderRadius: '12px',
             cursor: 'pointer',
-            marginBottom: '16px',
-            boxShadow: '0px 2px 8px rgba(234, 172, 8, 0.3)',
             transition: 'transform 0.2s, opacity 0.2s'
           }}
           onMouseDown={(e) => (e.currentTarget.style.transform = 'scale(0.98)')}
