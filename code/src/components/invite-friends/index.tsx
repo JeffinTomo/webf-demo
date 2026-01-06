@@ -116,7 +116,9 @@ export default function InviteFriends() {
     try {
       WebFPoint.shareInviteCode({ code });
       logger('Share invite code:', true);
-      setIsInviting(false);
+      setTimeout(() => {
+        setIsInviting(false);
+      }, 300);
     } catch (err) {
       console.error('Failed to share invite code:', err);
       setIsInviting(false);
