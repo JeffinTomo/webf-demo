@@ -78,6 +78,7 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
           padding: '0px',
           gap: '4px',
           width: '100%',
+          alignItems: 'center',
         }}
       >
         <span style={{
@@ -95,18 +96,25 @@ function FAQItemComponent({ item, index, isOpen, onToggle }: { item: FAQItem; in
         {/* Arrow Icon */}
         <div style={{
           width: '14px',
-          height: '14px',
+          height: '8px',
           display: 'flex',
-          textAlign: 'right',
-          position: 'relative',
-          top: !isOpen ? '2px' : '8px'
+          alignItems: 'center',
+          justifyContent: 'center'
         }}>
-          <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg" style={{
-            transform: !isOpen ? 'matrix(0.71, 0.71, 0.71, -0.71, 0, 0)' : 'rotate(-45deg)',
-            transition: 'transform 0.2s'
-          }}>
-            <path d="M0 0L8 0L8 8" stroke="#A9A29D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          {isOpen && (
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg" style={{
+              transition: 'opacity 0.2s'
+            }}>
+              <path d="M0.875 6.64972L6.64971 0.875014L12.4244 6.64972" stroke="#A9A29D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          )}
+          {!isOpen && (
+            <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg" style={{
+              transition: 'opacity 0.2s'
+            }}>
+              <path d="M0.875 1.35028L6.64971 7.12499L12.4244 1.35028" stroke="#A9A29D" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          )}
         </div>
       </div>
 
