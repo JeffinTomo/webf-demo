@@ -56,9 +56,7 @@ export default function DailyRequest() {
         }}>
           {/* Calendar Icon */}
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="4" width="18" height="18" rx="2" stroke="#FAFAF9" strokeWidth="2" fill="none" />
-            <path d="M16 2V6M8 2V6M3 10H21" stroke="#FAFAF9" strokeWidth="2" strokeLinecap="round" />
-            <path d="M8 14L10 16L13 13" stroke="#FAFAF9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M9 2V4H15V2H17V4H21C21.5523 4 22 4.44772 22 5V21C22 21.5523 21.5523 22 21 22H3C2.44772 22 2 21.5523 2 21V5C2 4.44772 2.44772 4 3 4H7V2H9ZM20 11H4V20H20V11ZM15.0355 12.136L16.4497 13.5503L11.5 18.5L7.96447 14.9645L9.37868 13.5503L11.5 15.6716L15.0355 12.136ZM7 6H4V9H20V6H17V7H15V6H9V7H7V6Z" fill="#FAFAF9" />
           </svg>
 
           <span style={{

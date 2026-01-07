@@ -65,3 +65,14 @@ body {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+#invite-friends-button {
+  transition: transform 0.1s ease, opacity 0.1s ease !important;
+  -webkit-tap-highlight-color: transparent !important;
+  outline: none;
+}
+
+#invite-friends-button:active {
+  transform: scale(0.92) !important;
+  opacity: 0.8 !important;
+}

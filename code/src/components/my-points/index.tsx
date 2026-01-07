@@ -13,7 +13,8 @@ export default function MyPoints({ points }: MyPointsProps) {
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '20px'
+        padding: '20px',
+        gap: '12px'
       }}
     >
       {/* Title - My WLFI Points */}
