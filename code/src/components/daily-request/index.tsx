@@ -165,7 +165,7 @@ function ActivityCard({ title, progress, description, onClick }: ActivityCardPro
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-start',
-        gap: '8px',
+        gap: '20px',
         width: '100%'
       }}>
         {/* Title */}
@@ -185,7 +185,7 @@ function ActivityCard({ title, progress, description, onClick }: ActivityCardPro
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'flex-start',
-          gap: '6px',
+          gap: '8px',
           width: '100%'
         }}>
           {/* Progress Bar */}
@@ -215,7 +215,7 @@ function ActivityCard({ title, progress, description, onClick }: ActivityCardPro
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            gap: '4px',
+            gap: '12px',
             width: '100%'
           }}>
             {/* Earned / To Go */}
