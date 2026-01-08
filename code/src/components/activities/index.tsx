@@ -147,7 +147,7 @@ export default function Activities() {
             fontWeight: 400,
             fontSize: '14px',
             lineHeight: '140%',
-            color: '#7A7C80'
+            color: '#79716B'
           }}>
             See more
           </span>
@@ -164,7 +164,7 @@ export default function Activities() {
               margin: "2px 2px 0 0",
               transform: 'rotate(405deg)'
             }}>
-              <path d="M0 0L6 0L6 6" stroke="#7A7C80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M0 0L6 0L6 6" stroke="#79716B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
         </div>
@@ -178,7 +178,7 @@ export default function Activities() {
         alignItems: 'flex-start',
         padding: '8px 0px',
         width: '100%',
-        background: '#1C1917',
+        background: '#201D1B',
         borderRadius: '12px'
       }}>
         {activities.map((activity) => (

@@ -30,6 +30,20 @@ export function WebFListView({
   const [startY, setStartY] = React.useState(0);
   const [pullDistance, setPullDistance] = React.useState(0);
 
+  React.useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0;
+
+      const rafId = requestAnimationFrame(() => {
+        if (containerRef.current) {
+          containerRef.current.scrollTop = 0;
+        }
+      });
+
+      return () => cancelAnimationFrame(rafId);
+    }
+  }, []);
+
   const handleTouchStart = (e: React.TouchEvent) => {
     if (containerRef.current && containerRef.current.scrollTop === 0) {
       setStartY(e.touches[0].clientY);
@@ -81,6 +95,7 @@ export function WebFListView({
         overflow: 'auto',
         WebkitOverflowScrolling: 'touch',
         position: 'relative',
+        scrollBehavior: 'auto',
         ...style
       }}
       onTouchStart={handleTouchStart}
