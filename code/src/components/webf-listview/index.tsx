@@ -31,17 +31,17 @@ export function WebFListView({
   const [pullDistance, setPullDistance] = React.useState(0);
 
   React.useEffect(() => {
-    if (containerRef.current) {
-      containerRef.current.scrollTop = 0;
+    if (!containerRef.current) return;
 
-      const rafId = requestAnimationFrame(() => {
-        if (containerRef.current) {
-          containerRef.current.scrollTop = 0;
-        }
-      });
+    containerRef.current.scrollTop = 0;
 
-      return () => cancelAnimationFrame(rafId);
-    }
+    const rafId = requestAnimationFrame(() => {
+      if (containerRef.current) {
+        containerRef.current.scrollTop = 0;
+      }
+    });
+
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   const handleTouchStart = (e: React.TouchEvent) => {
