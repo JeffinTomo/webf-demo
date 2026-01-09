@@ -6,7 +6,7 @@
  */
 
 import { webf } from '@openwebf/webf-enterprise-typings';
-import type { InviteCode, NavigationParams, PointNavigationTarget, Result, ToastMessage, UniqueId } from './types';
+import type { ClipboardText, InviteCode, NavigationParams, PointNavigationTarget, Result, ToastMessage, UniqueId } from './types';
 
 export class WebFPoint {
   static isAvailable(): boolean {
@@ -55,8 +55,15 @@ export class WebFPoint {
     return webf.invokeModuleAsync('Point', 'navigateTo', navigation);
   }
 
+  static async getClipboardText(): Promise<ClipboardText> {
+    if (!this.isAvailable()) {
+      throw new Error('WebF module "Point" is not available. Make sure it is registered via WebF.defineModule().');
+    }
+    return webf.invokeModuleAsync('Point', 'getClipboardText');
+  }
+
 }
 
 export type {
-  InviteCode,NavigationParams,PointNavigationTarget,Result,ToastMessage,UniqueId
+  ClipboardText,InviteCode,NavigationParams,PointNavigationTarget,Result,ToastMessage,UniqueId
 } from './types';

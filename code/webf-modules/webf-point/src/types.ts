@@ -20,11 +20,22 @@ export interface ToastMessage {
     /** Toast message content */
     message: string;
 }
-export /** Points page navigation target */
+export /**
+ * Points page navigation target
+ * @description Navigation targets for points reward actions
+ *
+ * - `cryptoList` - Navigate to Crypto list page (for "Get 100 points" and "Trade crypto")
+ * - `earn` - Navigate to Earn page (for "Keep $1,000+ in Earn")
+ * - `addMoney` - Navigate to Add Money page (for "Keep $1,000+ in WLFI balance")
+ */
 type PointNavigationTarget = 'cryptoList' | 'earn' | 'addMoney';
 export interface NavigationParams {
     /** Target page to navigate to */
     target: PointNavigationTarget;
+}
+export interface ClipboardText {
+    /** Text content from clipboard, null if empty or unavailable */
+    text: string | null;
 }
 
 export {};
