@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import bgImg from './bg.png';
+import { WebFPoint } from '@wlfi/webf-point';
 
 interface ReferralCodeProps {
   referralCode: string;
@@ -35,10 +36,12 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
 
   const handlePaste = async () => {
     try {
-      const text = await navigator.clipboard.readText();
-      setCode(text);
+      const clipboardText = await WebFPoint.getClipboardText();
+      console.log('clipboardText.text>>', clipboardText.text);
+
+      setCode(clipboardText.text || '123');
     } catch (error) {
-      console.error('Failed to read clipboard:', error);
+      console.error('Failed to share invite code:', error);
     }
   };
 
@@ -136,7 +139,6 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
             }}
           />
           <button
-            disabled={code.trim() === ''}
             onClick={handlePaste}
             style={{
               padding: '4px 12px',
@@ -157,6 +159,7 @@ export default function ReferralCode({ isOpen, onClose, onConfirm, referralCode 
 
         {/* Confirm Button */}
         <button
+          disabled={code.trim() === ''}
           onClick={handleConfirm}
           style={{
             display: 'flex',
